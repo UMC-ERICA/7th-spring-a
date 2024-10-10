@@ -1,1 +1,52 @@
 .DS_Store
+HELP.md
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+.DS_Store
+src/main/resources/application.yml
+src/main/resources/application-prod.yml
+src/main/java/com/example/spot/web/dto/test
+src/main/java/com/example/spot/web/controller/TestController.java
+src/main/java/com/example/spot/service/test
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+src/main/generated/
+src/main/java/com/example/spot/service/test/*
+src/main/java/com/example/spot/web/dto/test/*
+
+src/main/java/com/example/spot/web/controller/TestController.java
+**/generated
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+### yaml ###
+src/main/resources/application.yml
