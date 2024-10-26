@@ -2,6 +2,7 @@ package umc.spring.domain.member;
 
 import jakarta.persistence.*;
 import lombok.*;
+import umc.spring.domain.common.BaseEntity;
 import umc.spring.domain.store.Store;
 
 @Entity
@@ -9,7 +10,7 @@ import umc.spring.domain.store.Store;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Address {
+public class Address extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
