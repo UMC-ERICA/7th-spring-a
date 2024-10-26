@@ -2,6 +2,7 @@ package umc.spring.domain.mission;
 
 import jakarta.persistence.*;
 import lombok.*;
+import umc.spring.domain.common.BaseEntity;
 import umc.spring.domain.store.Store;
 
 import java.time.LocalDate;
@@ -14,7 +15,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Mission {
+public class Mission extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import umc.spring.domain.MemberFoodCategory;
 import umc.spring.domain.Review;
+import umc.spring.domain.common.BaseEntity;
 import umc.spring.domain.mission.MemberMission;
 import umc.spring.domain.enumClass.Gender;
 
@@ -16,7 +17,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Member {
+public class Member extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
