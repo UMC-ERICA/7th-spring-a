@@ -23,10 +23,13 @@ public class Mission extends BaseEntity {
 
     private String content;
 
+    // 미션 성공 시, 부여되는 포인트
     private Integer point;
 
+    // 미션 성공 여부
     private Boolean status;
 
+    // 미션 마감기한
     private LocalDate deadline;
 
     @ManyToOne(fetch = FetchType.LAZY)

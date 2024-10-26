@@ -31,6 +31,7 @@ public class Member extends BaseEntity {
 
     private Integer point;
 
+    // 회원 삭제 시, 보류 상태로 유지
     private Boolean status;
 
     private String email;
