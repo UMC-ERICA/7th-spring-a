@@ -28,7 +28,7 @@ public class Review extends BaseEntity {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @OneToMany(mappedBy = "review")
+    @OneToMany(mappedBy = "review",cascade = CascadeType.ALL)
     private List<ReviewImages> reviewImages=new ArrayList<>();
 
 }
