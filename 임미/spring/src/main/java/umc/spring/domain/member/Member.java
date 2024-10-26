@@ -26,6 +26,7 @@ public class Member extends BaseEntity {
 
     private String name;
 
+    @Enumerated(EnumType.STRING)
     private Gender gender;
 
     private LocalDate birthday;
@@ -37,6 +38,7 @@ public class Member extends BaseEntity {
 
     private String email;
 
+    @Enumerated(EnumType.STRING)
     private Role role;
 
 
