@@ -25,6 +25,6 @@ public class Question extends BaseEntity {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @OneToMany(mappedBy = "question")
+    @OneToMany(mappedBy = "question",cascade = CascadeType.ALL)
     private List<QuestionImage> questionImages;
 }

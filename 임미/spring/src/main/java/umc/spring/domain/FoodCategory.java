@@ -20,6 +20,6 @@ public class FoodCategory extends BaseEntity {
 
     private String name;
 
-    @OneToMany(mappedBy = "foodCategory")
+    @OneToMany(mappedBy = "foodCategory",cascade = CascadeType.ALL)
     private List<MemberFoodCategory> memberFoodCategories=new ArrayList<>();
 }

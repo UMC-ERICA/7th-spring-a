@@ -51,12 +51,12 @@ public class Member extends BaseEntity {
     @OneToOne(mappedBy = "member")
     private Alarm alarm;
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member",cascade = CascadeType.ALL)
     private List<MemberFoodCategory> memberFoodCategories = new ArrayList<>();
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member",cascade = CascadeType.ALL)
     private List<MemberMission> memberMissions = new ArrayList<>();
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member",cascade = CascadeType.ALL)
     private List<Review> reviews=new ArrayList<>();
 }
