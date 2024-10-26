@@ -5,6 +5,7 @@ import lombok.*;
 import umc.spring.domain.MemberFoodCategory;
 import umc.spring.domain.Review;
 import umc.spring.domain.common.BaseEntity;
+import umc.spring.domain.enumClass.Role;
 import umc.spring.domain.mission.MemberMission;
 import umc.spring.domain.enumClass.Gender;
 
@@ -35,6 +36,8 @@ public class Member extends BaseEntity {
     private Boolean status;
 
     private String email;
+
+    private Role role;
 
 
     // 매핑
