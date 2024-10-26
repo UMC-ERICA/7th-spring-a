@@ -19,6 +19,7 @@ public class Alarm extends BaseEntity {
 
     private String content;
 
+    // 알람 읽음 상태
     private Boolean status;
 
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
