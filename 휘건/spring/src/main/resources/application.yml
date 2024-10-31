@@ -1,12 +1,12 @@
 spring:
   application:
-    name: instaClone_9room
+    name: Application
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/UMC?serverTimezone=Asia/Seoul
-    username: root
-    password: hwigun
+    url: jdbc:mysql://localhost:3306/umc7th?serverTimezone=Asia/Seoul
+    username: ${LOCAL_DB_USERNAME}
+    password: ${LOCAL_DB_PASSWORD}
 
   jpa:
     properties:
@@ -16,5 +16,5 @@ spring:
         format_sql: true
         use_sql_comments: true
         hbm2ddl:
-          auto: update
+          auto: create
         default_batch_fetch_size: 1000
