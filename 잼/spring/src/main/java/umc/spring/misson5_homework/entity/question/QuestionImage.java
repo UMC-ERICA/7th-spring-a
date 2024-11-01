@@ -20,5 +20,5 @@ public class QuestionImage {
     private Question question;
 
     @Column(nullable = false)
-    private String questionImage_path;
+    private String questionImagePath;
 }

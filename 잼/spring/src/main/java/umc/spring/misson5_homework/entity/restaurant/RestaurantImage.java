@@ -20,5 +20,5 @@ public class RestaurantImage {
     private Restaurant restaurant;
 
     @Column(nullable = false)
-    private String restaurantImage_path;
+    private String restaurantImagePath;
 }
