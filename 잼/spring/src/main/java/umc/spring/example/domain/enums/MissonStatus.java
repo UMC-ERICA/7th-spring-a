@@ -1,4 +1,4 @@
-package umc.spring.misson5_ex.domain.enums;
+package umc.spring.example.domain.enums;
 
 public enum MissonStatus {
     CHALLENGING, COMPLETE

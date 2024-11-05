@@ -1,4 +1,4 @@
-package umc.spring.misson5_ex.domain.common;
+package umc.spring.example.domain.common;
 
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
