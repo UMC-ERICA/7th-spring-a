@@ -1,11 +1,11 @@
-package umc.spring.misson5_ex.domain.mapping;
+package umc.spring.example.domain.mapping;
 
 
 import jakarta.persistence.*;
 import lombok.*;
-import umc.spring.misson5_ex.domain.Member;
-import umc.spring.misson5_ex.domain.common.BaseEntity;
-import umc.spring.misson5_ex.domain.enums.MissonStatus;
+import umc.spring.example.domain.Member;
+import umc.spring.example.domain.common.BaseEntity;
+import umc.spring.example.domain.enums.MissonStatus;
 
 @Entity
 @Getter

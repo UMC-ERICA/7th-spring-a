@@ -1,14 +1,14 @@
-package umc.spring.misson5_ex.domain;
+package umc.spring.example.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
-import umc.spring.misson5_ex.domain.enums.Gender;
-import umc.spring.misson5_ex.domain.enums.MemberStatus;
-import umc.spring.misson5_ex.domain.enums.SocialType;
-import umc.spring.misson5_ex.domain.mapping.MemberAgree;
-import umc.spring.misson5_ex.domain.mapping.MemberMission;
-import umc.spring.misson5_ex.domain.mapping.MemberPrefer;
-import umc.spring.misson5_ex.domain.mapping.Review;
+import umc.spring.example.domain.enums.Gender;
+import umc.spring.example.domain.enums.MemberStatus;
+import umc.spring.example.domain.enums.SocialType;
+import umc.spring.example.domain.mapping.MemberAgree;
+import umc.spring.example.domain.mapping.MemberMission;
+import umc.spring.example.domain.mapping.MemberPrefer;
+import umc.spring.example.domain.mapping.Review;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

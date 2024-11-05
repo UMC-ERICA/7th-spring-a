@@ -1,7 +1,7 @@
-package umc.spring.misson5_ex.domain.mapping;
+package umc.spring.example.domain.mapping;
 
 import jakarta.persistence.*;
-import umc.spring.misson5_ex.domain.Member;
+import umc.spring.example.domain.Member;
 
 @Entity
 public class Review {
