@@ -5,4 +5,5 @@ import umc.spring.example.domain.mapping.Store;
 
 public interface StoreRepository extends JpaRepository<Store,Long>, StoreRepositoryCustom {
 
+
 }

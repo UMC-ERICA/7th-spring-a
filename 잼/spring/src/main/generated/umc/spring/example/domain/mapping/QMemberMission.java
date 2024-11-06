@@ -33,6 +33,8 @@ public class QMemberMission extends EntityPathBase<MemberMission> {
 
     public final QMission mission;
 
+    public final StringPath state = createString("state");
+
     public final EnumPath<umc.spring.example.domain.enums.MissonStatus> status = createEnum("status", umc.spring.example.domain.enums.MissonStatus.class);
 
     //inherited
@@ -56,7 +58,7 @@ public class QMemberMission extends EntityPathBase<MemberMission> {
 
     public QMemberMission(Class<? extends MemberMission> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.member = inits.isInitialized("member") ? new umc.spring.example.domain.QMember(forProperty("member")) : null;
+        this.member = inits.isInitialized("member") ? new umc.spring.example.domain.QMember(forProperty("member"), inits.get("member")) : null;
         this.mission = inits.isInitialized("mission") ? new QMission(forProperty("mission"), inits.get("mission")) : null;
     }
 

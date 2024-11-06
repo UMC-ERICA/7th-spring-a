@@ -16,7 +16,7 @@ import com.querydsl.core.types.dsl.PathInits;
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
 public class QReviewImage extends EntityPathBase<ReviewImage> {
 
-    private static final long serialVersionUID = -1976992618L;
+    private static final long serialVersionUID = 1213227485L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 

@@ -16,7 +16,7 @@ import com.querydsl.core.types.dsl.PathInits;
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
 public class QQuestionImage extends EntityPathBase<QuestionImage> {
 
-    private static final long serialVersionUID = 189648342L;
+    private static final long serialVersionUID = -446515299L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 

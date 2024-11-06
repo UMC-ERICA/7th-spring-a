@@ -16,7 +16,7 @@ import com.querydsl.core.types.dsl.PathInits;
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
 public class QVerifyMisson extends EntityPathBase<VerifyMisson> {
 
-    private static final long serialVersionUID = 867980831L;
+    private static final long serialVersionUID = 62850470L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 

@@ -22,9 +22,23 @@ public class QReview extends EntityPathBase<Review> {
 
     public static final QReview review = new QReview("review");
 
+    public final umc.spring.example.base.QBaseEntity _super = new umc.spring.example.base.QBaseEntity(this);
+
+    public final StringPath content = createString("content");
+
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> createAt = _super.createAt;
+
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
     public final umc.spring.example.domain.QMember member;
+
+    public final NumberPath<Integer> rating = createNumber("rating", Integer.class);
+
+    public final QStore store;
+
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> updateAt = _super.updateAt;
 
     public QReview(String variable) {
         this(Review.class, forVariable(variable), INITS);
@@ -44,7 +58,8 @@ public class QReview extends EntityPathBase<Review> {
 
     public QReview(Class<? extends Review> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.member = inits.isInitialized("member") ? new umc.spring.example.domain.QMember(forProperty("member")) : null;
+        this.member = inits.isInitialized("member") ? new umc.spring.example.domain.QMember(forProperty("member"), inits.get("member")) : null;
+        this.store = inits.isInitialized("store") ? new QStore(forProperty("store"), inits.get("store")) : null;
     }
 
 }

@@ -24,6 +24,8 @@ public class QMission extends EntityPathBase<Mission> {
 
     public final umc.spring.example.domain.common.QBaseEntity _super = new umc.spring.example.domain.common.QBaseEntity(this);
 
+    public final StringPath content = createString("content");
+
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createdAt = _super.createdAt;
 
@@ -35,7 +37,11 @@ public class QMission extends EntityPathBase<Mission> {
 
     public final StringPath missionSpec = createString("missionSpec");
 
+    public final NumberPath<Integer> point = createNumber("point", Integer.class);
+
     public final NumberPath<Integer> reward = createNumber("reward", Integer.class);
+
+    public final EnumPath<umc.spring.example.domain.enums.MissonStatus> status = createEnum("status", umc.spring.example.domain.enums.MissonStatus.class);
 
     public final QStore store;
 
@@ -60,7 +66,7 @@ public class QMission extends EntityPathBase<Mission> {
 
     public QMission(Class<? extends Mission> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.store = inits.isInitialized("store") ? new QStore(forProperty("store")) : null;
+        this.store = inits.isInitialized("store") ? new QStore(forProperty("store"), inits.get("store")) : null;
     }
 
 }
