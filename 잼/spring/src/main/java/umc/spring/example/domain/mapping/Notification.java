@@ -1,36 +1,24 @@
 package umc.spring.example.domain.mapping;
 
-
 import jakarta.persistence.*;
 import lombok.*;
 import umc.spring.example.domain.Member;
-import umc.spring.example.domain.common.BaseEntity;
-import umc.spring.example.domain.enums.MissonStatus;
+import umc.spring.example.domain.enums.NotificationStatus;
 
 @Entity
 @Getter
-@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class MemberMission extends BaseEntity {
+public class Notification {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    private MissonStatus status;
+    private NotificationStatus notificationStatus;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "misson_id")
-    private Mission mission;
-
-    private String state;
-
-
-
 }

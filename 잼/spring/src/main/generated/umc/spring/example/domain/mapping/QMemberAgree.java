@@ -54,7 +54,7 @@ public class QMemberAgree extends EntityPathBase<MemberAgree> {
 
     public QMemberAgree(Class<? extends MemberAgree> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.member = inits.isInitialized("member") ? new umc.spring.example.domain.QMember(forProperty("member")) : null;
+        this.member = inits.isInitialized("member") ? new umc.spring.example.domain.QMember(forProperty("member"), inits.get("member")) : null;
         this.terms = inits.isInitialized("terms") ? new QTerms(forProperty("terms")) : null;
     }
 

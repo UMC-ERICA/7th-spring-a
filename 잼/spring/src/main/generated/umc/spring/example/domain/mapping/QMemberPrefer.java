@@ -55,7 +55,7 @@ public class QMemberPrefer extends EntityPathBase<MemberPrefer> {
     public QMemberPrefer(Class<? extends MemberPrefer> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.foodCategory = inits.isInitialized("foodCategory") ? new QFoodCategory(forProperty("foodCategory")) : null;
-        this.member = inits.isInitialized("member") ? new umc.spring.example.domain.QMember(forProperty("member")) : null;
+        this.member = inits.isInitialized("member") ? new umc.spring.example.domain.QMember(forProperty("member"), inits.get("member")) : null;
     }
 
 }

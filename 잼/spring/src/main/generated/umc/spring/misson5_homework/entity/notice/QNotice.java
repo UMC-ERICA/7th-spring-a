@@ -16,7 +16,7 @@ import com.querydsl.core.types.dsl.PathInits;
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
 public class QNotice extends EntityPathBase<Notice> {
 
-    private static final long serialVersionUID = 1757929413L;
+    private static final long serialVersionUID = -1919251938L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 

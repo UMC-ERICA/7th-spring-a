@@ -3,6 +3,7 @@ package umc.spring.example.domain.mapping;
 import jakarta.persistence.*;
 import lombok.*;
 import umc.spring.example.domain.common.BaseEntity;
+import umc.spring.example.domain.enums.MissonStatus;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -24,6 +25,13 @@ public class Mission extends BaseEntity {
     private LocalDate deadline;
 
     private String missionSpec;
+
+    private Integer point;
+
+    private String content;
+
+    @Enumerated(EnumType.STRING)
+    private MissonStatus status;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_id")
