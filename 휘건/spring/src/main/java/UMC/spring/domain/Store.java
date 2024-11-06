@@ -48,4 +48,14 @@ public class Store extends BaseEntity {
     // Review OTM
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
     private List<Review> reviewList = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "Store{" +
+                "id=" + id +
+                ", name='" + storeName + '\'' +
+                ", address='" + storeAddress + '\'' +
+                ", score=" + storeRate +
+                '}';
+    }
 }
