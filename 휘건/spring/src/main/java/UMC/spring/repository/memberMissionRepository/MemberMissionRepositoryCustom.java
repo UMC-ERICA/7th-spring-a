@@ -12,4 +12,7 @@ public interface MemberMissionRepositoryCustom {
 
     Page<MemberMissionDTO> findMissionByStatus(Long memberId, MissionStatus missionStatus, Pageable pageable);
 
+    Page<MemberMissionDTO> findAvailableMissions(Long memberId, Pageable pageable);
+
+    Integer calculateCompletedMissionRemainder(Long memberId);
 }
