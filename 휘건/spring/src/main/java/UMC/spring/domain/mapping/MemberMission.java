@@ -4,6 +4,7 @@ import UMC.spring.domain.Member;
 import UMC.spring.domain.Mission;
 import UMC.spring.domain.baseEntity.BaseEntity;
 
+import UMC.spring.domain.enums.MissionStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,6 +18,9 @@ public class MemberMission extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Enumerated(EnumType.STRING)
+    private MissionStatus missionStatus;
 
     // Member MTO
     @ManyToOne(fetch = FetchType.LAZY)

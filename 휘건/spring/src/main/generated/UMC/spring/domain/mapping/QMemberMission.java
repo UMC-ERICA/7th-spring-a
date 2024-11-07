@@ -33,6 +33,8 @@ public class QMemberMission extends EntityPathBase<MemberMission> {
 
     public final UMC.spring.domain.QMission mission;
 
+    public final EnumPath<UMC.spring.domain.enums.MissionStatus> missionStatus = createEnum("missionStatus", UMC.spring.domain.enums.MissionStatus.class);
+
     //inherited
     public final DateTimePath<java.time.LocalDateTime> updatedAt = _super.updatedAt;
 
