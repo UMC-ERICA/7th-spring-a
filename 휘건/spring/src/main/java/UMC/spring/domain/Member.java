@@ -54,6 +54,9 @@ public class Member extends BaseEntity {
     @Column(nullable = false, length = 60)
     private String email;
 
+    @Column(nullable = false, length = 15)
+    private String phone;
+
 
 
     // Review OTM

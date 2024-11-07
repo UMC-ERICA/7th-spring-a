@@ -53,6 +53,8 @@ public class QMember extends EntityPathBase<Member> {
 
     public final EnumPath<UMC.spring.domain.enums.MemberStatus> memberStatus = createEnum("memberStatus", UMC.spring.domain.enums.MemberStatus.class);
 
+    public final StringPath phone = createString("phone");
+
     public final NumberPath<Integer> point = createNumber("point", Integer.class);
 
     public final QRegion region;
