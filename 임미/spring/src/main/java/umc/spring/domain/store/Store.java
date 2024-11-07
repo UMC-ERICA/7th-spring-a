@@ -42,4 +42,15 @@ public class Store {
 
     @OneToMany(mappedBy = "store")
     private List<Mission> missions=new ArrayList<>();
+
+
+    @Override
+    public String toString() {
+        return "Store{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", score=" + score +
+                '}';
+    }
 }
