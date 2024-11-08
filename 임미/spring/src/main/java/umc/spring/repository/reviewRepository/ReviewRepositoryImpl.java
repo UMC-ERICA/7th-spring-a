@@ -6,13 +6,9 @@ import org.springframework.stereotype.Repository;
 import umc.spring.domain.Review;
 import umc.spring.domain.member.Member;
 import umc.spring.domain.member.QMember;
-import umc.spring.domain.store.QStore;
-import umc.spring.domain.store.Store;
-import umc.spring.repository.MemberRepository;
-import umc.spring.repository.storeRepository.StoreRepository;
+import umc.spring.repository.memberRepository.MemberRepository;
 
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
