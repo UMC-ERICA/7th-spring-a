@@ -1,18 +1,17 @@
-package UMC.spring.domain.mapping;
+package umc.spring.misson5_ex.domain.mapping;
 
-import UMC.spring.domain.Member;
-import UMC.spring.domain.Mission;
-import UMC.spring.domain.baseEntity.BaseEntity;
 
-import UMC.spring.domain.enums.MissionStatus;
 import jakarta.persistence.*;
 import lombok.*;
+import umc.spring.misson5_ex.domain.Member;
+import umc.spring.misson5_ex.domain.common.BaseEntity;
+import umc.spring.misson5_ex.domain.enums.MissonStatus;
 
 @Entity
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
 @Getter
 @Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class MemberMission extends BaseEntity {
 
     @Id
@@ -20,15 +19,13 @@ public class MemberMission extends BaseEntity {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    private MissionStatus missionStatus;
+    private MissonStatus status;
 
-    // Member MTO
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 
-    // Mission MTO
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "mission_id")
+    @JoinColumn(name = "misson_id")
     private Mission mission;
 }
