@@ -5,7 +5,6 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import umc.spring.example.domain.QMember;
-import umc.spring.example.domain.enums.NotificationStatus;
 import umc.spring.example.domain.mapping.QMemberAddress;
 import umc.spring.example.domain.mapping.QMemberMission;
 import umc.spring.example.domain.mapping.QNotification;
