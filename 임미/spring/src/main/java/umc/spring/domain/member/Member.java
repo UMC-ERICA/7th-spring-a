@@ -2,6 +2,7 @@ package umc.spring.domain.member;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 import umc.spring.domain.MemberFoodCategory;
 import umc.spring.domain.Review;
 import umc.spring.domain.common.BaseEntity;
@@ -31,10 +32,10 @@ public class Member extends BaseEntity {
 
     private LocalDate birthday;
 
-    private Integer point;
+    private Integer point=0;
 
     // 회원 삭제 시, 보류 상태로 유지
-    private Boolean status;
+    private Boolean status=Boolean.TRUE;
 
     private String email;
 

@@ -1,20 +1,26 @@
 package umc.spring.web.dto;
 
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.Getter;
+import umc.spring.domain.enumClass.Gender;
+import umc.spring.domain.enumClass.Role;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class MemberRequestDTO {
 
     @Getter
     public static class JoinDto{
+
         String name;
+
         Integer gender;
-        Integer birthYear;
-        Integer birthMonth;
-        Integer birthDay;
-        String address;
-        String specAddress;
-        List<Long> preferCategory;
+
+        LocalDate birthDate;
+
+        String email;
+
     }
 }
