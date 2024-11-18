@@ -2,7 +2,6 @@ package UMC.spring.domain;
 
 import UMC.spring.domain.baseEntity.BaseEntity;
 
-import UMC.spring.domain.enums.FoodCategory;
 import UMC.spring.domain.mapping.MemberPrefer;
 import jakarta.persistence.*;
 import lombok.*;
@@ -21,7 +20,7 @@ public class Prefer extends BaseEntity {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    private FoodCategory foodCategory;
+    private UMC.spring.domain.enums.FoodCategory foodCategory;
 
     // MemberPrefer OTM
     @OneToMany(mappedBy = "prefer", cascade = CascadeType.ALL)

@@ -10,6 +10,8 @@ import UMC.spring.domain.mapping.MemberMission;
 import UMC.spring.domain.mapping.MemberPrefer;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -21,6 +23,8 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Builder
+@DynamicInsert
+@DynamicUpdate
 public class Member extends BaseEntity {
 
     @Id
@@ -33,6 +37,7 @@ public class Member extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private MemberGender gender;
+
 
     private LocalDate birthdate;
 
