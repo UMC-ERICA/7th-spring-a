@@ -25,7 +25,7 @@ public class MemberPrefer extends BaseEntity {
     private FoodCategory foodCategory;
 
 
-    public void serMember(Member member) {
+    public void setMember(Member member) {
         this.member = member;
     }
 

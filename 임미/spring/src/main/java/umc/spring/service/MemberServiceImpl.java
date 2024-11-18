@@ -37,7 +37,7 @@ public class MemberServiceImpl implements MemberService{
 
         List<MemberPrefer> memberPreferList = MemberPreferConverter.toMemberPreferList(foodCategoryList);
 
-        memberPreferList.forEach(memberPrefer -> {memberPrefer.serMember(newMember);});
+        memberPreferList.forEach(memberPrefer -> {memberPrefer.setMember(newMember);});
 
         return memberRepository.save(newMember);
     }
