@@ -1,5 +1,9 @@
 package UMC.spring.service.storeService;
 
+import UMC.spring.api.code.BaseErrorCode;
+import UMC.spring.api.code.status.ErrorStatus;
+import UMC.spring.api.exception.handler.RegionHandler;
+import UMC.spring.converter.StoreConverter;
 import UMC.spring.domain.Region;
 import UMC.spring.domain.Store;
 import UMC.spring.domain.enums.FoodCategory;
@@ -9,8 +13,6 @@ import UMC.spring.web.dto.storeDTO.StoreRequestDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-import java.util.Locale;
 
 @Service
 @RequiredArgsConstructor
@@ -25,18 +27,11 @@ public class StoreCommandServiceImpl implements StoreCommandService{
                 request.getCity(),
                 request.getDistrict(),
                 request.getNeighborhood()
-        ).orElseThrow(() -> new IllegalArgumentException("Region not found"));
+        ).orElseThrow(() -> new RegionHandler(ErrorStatus.REGION_NOT_FOUND));
 
         FoodCategory category = FoodCategory.fromString(request.getStoreCategory());
 
-        Store newStore = Store.builder()
-                .storeName(request.getName())
-                .storeAddress(request.getStoreAddress())
-                .storeCategory(category)
-                .storeRate(BigDecimal.ZERO)
-                .region(region)
-                .build();
-
+        Store newStore = StoreConverter.toStore(request, category ,region);
 
         return storeRepository.save(newStore);
     }
