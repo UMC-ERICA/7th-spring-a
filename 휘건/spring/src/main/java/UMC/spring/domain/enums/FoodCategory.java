@@ -1,5 +1,7 @@
 package UMC.spring.domain.enums;
 
+import UMC.spring.api.code.status.ErrorStatus;
+import UMC.spring.api.exception.handler.PreferHandler;
 import lombok.Getter;
 
 @Getter
@@ -22,7 +24,7 @@ public enum FoodCategory {
         try {
             return FoodCategory.valueOf(value.toUpperCase());
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("알맞지 않은 카테고리입니다. " + value);
+            throw new PreferHandler(ErrorStatus.FOOD_CATEGORY_NOT_FOUND);
         }
     }
 }
