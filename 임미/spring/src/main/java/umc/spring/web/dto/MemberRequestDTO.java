@@ -22,5 +22,7 @@ public class MemberRequestDTO {
 
         String email;
 
+        List<Long> preferCategory;
+
     }
 }
