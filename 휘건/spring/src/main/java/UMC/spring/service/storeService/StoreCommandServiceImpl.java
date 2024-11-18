@@ -1,2 +1,9 @@
-package UMC.spring.service.storeService;public class StoreCommandServiceImpl {
+package UMC.spring.service.storeService;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class StoreCommandServiceImpl implements StoreCommandService{
 }

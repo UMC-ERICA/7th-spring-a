@@ -4,6 +4,7 @@ import UMC.spring.domain.baseEntity.BaseEntity;
 import UMC.spring.domain.enums.FoodCategory;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ public class Store extends BaseEntity {
     private String storeAddress;
 
     @Column(precision = 3, scale = 2)
+    @ColumnDefault("0.0")
     private BigDecimal storeRate;
 
     @Enumerated(EnumType.STRING)
