@@ -2,6 +2,9 @@ package umc.spring.domain.member;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 import umc.spring.domain.MemberFoodCategory;
 import umc.spring.domain.Review;
@@ -14,6 +17,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@DynamicUpdate
+@DynamicInsert
 @Entity
 @Getter
 @Builder
@@ -32,7 +37,8 @@ public class Member extends BaseEntity {
 
     private LocalDate birthday;
 
-    private Integer point=0;
+    @ColumnDefault("0")
+    private Integer point;
 
     // 회원 삭제 시, 보류 상태로 유지
     private Boolean status=Boolean.TRUE;
