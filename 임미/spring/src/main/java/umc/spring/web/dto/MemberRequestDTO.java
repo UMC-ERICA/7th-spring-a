@@ -5,6 +5,7 @@ import jakarta.persistence.Enumerated;
 import lombok.Getter;
 import umc.spring.domain.enumClass.Gender;
 import umc.spring.domain.enumClass.Role;
+import umc.spring.validation.annotation.ExistCategories;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -22,6 +23,7 @@ public class MemberRequestDTO {
 
         String email;
 
+        @ExistCategories
         List<Long> preferCategory;
 
     }
