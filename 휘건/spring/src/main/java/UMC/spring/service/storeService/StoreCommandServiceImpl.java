@@ -35,4 +35,10 @@ public class StoreCommandServiceImpl implements StoreCommandService{
 
         return storeRepository.save(newStore);
     }
+
+    @Override
+    public Boolean isStoreExist(Long storeId) {
+
+        return storeRepository.existsById(storeId);
+    }
 }

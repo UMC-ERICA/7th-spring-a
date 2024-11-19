@@ -6,4 +6,6 @@ import UMC.spring.web.dto.storeDTO.StoreRequestDTO;
 public interface StoreCommandService {
 
     Store CreateStore(StoreRequestDTO.CreateStoreDTO request);
+
+    Boolean isStoreExist(Long storeId);
 }
