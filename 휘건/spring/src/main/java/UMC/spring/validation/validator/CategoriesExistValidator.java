@@ -1,7 +1,6 @@
 package UMC.spring.validation.validator;
 
 import UMC.spring.api.code.status.ErrorStatus;
-import UMC.spring.repository.preferRepository.PreferRepository;
 import UMC.spring.service.preferService.PreferCommandService;
 import UMC.spring.validation.annotation.ExistCategories;
 import jakarta.validation.ConstraintValidator;
