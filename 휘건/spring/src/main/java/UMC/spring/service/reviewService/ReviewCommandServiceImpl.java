@@ -34,7 +34,7 @@ public class ReviewCommandServiceImpl implements ReviewCommandService{
         Review review = ReviewConverter.toReview(request, member, store);
 
         store.updateStoreRate(request.getRate());
-        storeRepository.save(store);
+        reviewRepository.save(review);
 
         return review;
     }
