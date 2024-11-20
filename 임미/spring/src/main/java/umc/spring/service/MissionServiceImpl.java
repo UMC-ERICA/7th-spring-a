@@ -4,11 +4,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import umc.spring.converter.MissionConverter;
+import umc.spring.domain.member.Member;
 import umc.spring.domain.mission.Mission;
 import umc.spring.domain.store.Store;
 import umc.spring.repository.MissionRepository;
+import umc.spring.repository.memberRepository.MemberRepository;
 import umc.spring.repository.storeRepository.StoreRepository;
 import umc.spring.web.dto.MissionDTO;
+
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -34,5 +38,6 @@ public class MissionServiceImpl implements MissionService {
                 .build();
 
     }
+
 
 }
