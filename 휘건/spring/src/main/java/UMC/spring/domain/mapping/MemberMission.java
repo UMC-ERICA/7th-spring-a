@@ -20,6 +20,7 @@ public class MemberMission extends BaseEntity {
     private Long id;
 
     @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "varchar(12) default 'IN_PROGRESS'")
     private MissionStatus missionStatus;
 
     // Member MTO
