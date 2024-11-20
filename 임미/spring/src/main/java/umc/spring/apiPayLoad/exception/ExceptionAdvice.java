@@ -26,94 +26,96 @@ import java.util.Optional;
 @RestControllerAdvice(annotations = {RestController.class})
 public class ExceptionAdvice extends ResponseEntityExceptionHandler {
 
-
     @ExceptionHandler
     public ResponseEntity<Object> validation(ConstraintViolationException e, WebRequest request) {
+        log.error("Validation error: {}", e.getMessage(), e);
+
         String errorMessage = e.getConstraintViolations().stream()
                 .map(constraintViolation -> constraintViolation.getMessage())
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("ConstraintViolationException 추출 도중 에러 발생"));
+                .orElse("Invalid input");
 
-        return handleExceptionInternalConstraint(e, ErrorStatus.valueOf(errorMessage), HttpHeaders.EMPTY,request);
+        ErrorStatus errorStatus = resolveErrorStatus(errorMessage, ErrorStatus._BAD_REQUEST);
+
+        return handleExceptionInternalConstraint(e, errorStatus, HttpHeaders.EMPTY, request);
     }
 
     @Override
-    public ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException e, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(
+            MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
 
         Map<String, String> errors = new LinkedHashMap<>();
+        ex.getBindingResult().getFieldErrors().forEach(fieldError -> {
+            String fieldName = fieldError.getField();
+            String errorMessage = Optional.ofNullable(fieldError.getDefaultMessage()).orElse("");
+            errors.merge(fieldName, errorMessage, (existing, newMsg) -> existing + ", " + newMsg);
+        });
 
-        e.getBindingResult().getFieldErrors().stream()
-                .forEach(fieldError -> {
-                    String fieldName = fieldError.getField();
-                    String errorMessage = Optional.ofNullable(fieldError.getDefaultMessage()).orElse("");
-                    errors.merge(fieldName, errorMessage, (existingErrorMessage, newErrorMessage) -> existingErrorMessage + ", " + newErrorMessage);
-                });
+        ApiResponse<Object> body = ApiResponse.onFailure(ErrorStatus._BAD_REQUEST.getCode(),
+                ErrorStatus._BAD_REQUEST.getMessage(),
+                errors);
 
-        return handleExceptionInternalArgs(e,HttpHeaders.EMPTY,ErrorStatus.valueOf("_BAD_REQUEST"),request,errors);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).headers(headers).body(body);
     }
+
 
     @ExceptionHandler
     public ResponseEntity<Object> exception(Exception e, WebRequest request) {
-        e.printStackTrace();
+        log.error("Unhandled exception: {}", e.getMessage(), e);
 
-        return handleExceptionInternalFalse(e, ErrorStatus._INTERNAL_SERVER_ERROR, HttpHeaders.EMPTY, ErrorStatus._INTERNAL_SERVER_ERROR.getHttpStatus(),request, e.getMessage());
+        return handleExceptionInternalFalse(
+                e,
+                ErrorStatus._INTERNAL_SERVER_ERROR,
+                HttpHeaders.EMPTY,
+                ErrorStatus._INTERNAL_SERVER_ERROR.getHttpStatus(),
+                request,
+                e.getMessage()
+        );
     }
 
-    @ExceptionHandler(value = GeneralException.class)
-    public ResponseEntity onThrowException(GeneralException generalException, HttpServletRequest request) {
-        ErrorReasonDTO errorReasonHttpStatus = generalException.getErrorReasonHttpStatus();
-        return handleExceptionInternal(generalException,errorReasonHttpStatus,null,request);
+    @ExceptionHandler(GeneralException.class)
+    public ResponseEntity<Object> onThrowException(GeneralException generalException, HttpServletRequest request) {
+        log.error("General exception: {}", generalException.getMessage(), generalException);
+
+        ErrorReasonDTO errorReason = generalException.getErrorReasonHttpStatus();
+        return handleExceptionInternal(generalException, errorReason, null, request);
     }
 
-    private ResponseEntity<Object> handleExceptionInternal(Exception e, ErrorReasonDTO reason,
-                                                           HttpHeaders headers, HttpServletRequest request) {
-
-        ApiResponse<Object> body = ApiResponse.onFailure(reason.getCode(),reason.getMessage(),null);
-//        e.printStackTrace();
-
+    private ResponseEntity<Object> handleExceptionInternal(
+            Exception e, ErrorReasonDTO reason, HttpHeaders headers, HttpServletRequest request) {
+        ApiResponse<Object> body = ApiResponse.onFailure(reason.getCode(), reason.getMessage(), null);
         WebRequest webRequest = new ServletWebRequest(request);
-        return super.handleExceptionInternal(
-                e,
-                body,
-                headers,
-                reason.getHttpStatus(),
-                webRequest
-        );
+
+        return super.handleExceptionInternal(e, body, headers, reason.getHttpStatus(), webRequest);
     }
 
-    private ResponseEntity<Object> handleExceptionInternalFalse(Exception e, ErrorStatus errorCommonStatus,
-                                                                HttpHeaders headers, HttpStatus status, WebRequest request, String errorPoint) {
-        ApiResponse<Object> body = ApiResponse.onFailure(errorCommonStatus.getCode(),errorCommonStatus.getMessage(),errorPoint);
-        return super.handleExceptionInternal(
-                e,
-                body,
-                headers,
-                status,
-                request
-        );
+    private ResponseEntity<Object> handleExceptionInternalFalse(
+            Exception e, ErrorStatus errorStatus, HttpHeaders headers, HttpStatus status, WebRequest request, String errorPoint) {
+        ApiResponse<Object> body = ApiResponse.onFailure(errorStatus.getCode(), errorStatus.getMessage(), errorPoint);
+
+        return super.handleExceptionInternal(e, body, headers, status, request);
     }
 
-    private ResponseEntity<Object> handleExceptionInternalArgs(Exception e, HttpHeaders headers, ErrorStatus errorCommonStatus,
-                                                               WebRequest request, Map<String, String> errorArgs) {
-        ApiResponse<Object> body = ApiResponse.onFailure(errorCommonStatus.getCode(),errorCommonStatus.getMessage(),errorArgs);
-        return super.handleExceptionInternal(
-                e,
-                body,
-                headers,
-                errorCommonStatus.getHttpStatus(),
-                request
-        );
+    private ResponseEntity<Object> handleExceptionInternalArgs(
+            Exception e, HttpHeaders headers, ErrorStatus errorStatus, WebRequest request, Map<String, String> errorArgs) {
+        ApiResponse<Object> body = ApiResponse.onFailure(errorStatus.getCode(), errorStatus.getMessage(), errorArgs);
+
+        return super.handleExceptionInternal(e, body, headers, errorStatus.getHttpStatus(), request);
     }
 
-    private ResponseEntity<Object> handleExceptionInternalConstraint(Exception e, ErrorStatus errorCommonStatus,
-                                                                     HttpHeaders headers, WebRequest request) {
-        ApiResponse<Object> body = ApiResponse.onFailure(errorCommonStatus.getCode(), errorCommonStatus.getMessage(), null);
-        return super.handleExceptionInternal(
-                e,
-                body,
-                headers,
-                errorCommonStatus.getHttpStatus(),
-                request
-        );
+    private ResponseEntity<Object> handleExceptionInternalConstraint(
+            Exception e, ErrorStatus errorStatus, HttpHeaders headers, WebRequest request) {
+        ApiResponse<Object> body = ApiResponse.onFailure(errorStatus.getCode(), errorStatus.getMessage(), null);
+
+        return super.handleExceptionInternal(e, body, headers, errorStatus.getHttpStatus(), request);
+    }
+
+    private ErrorStatus resolveErrorStatus(String errorMessage, ErrorStatus defaultStatus) {
+        try {
+            return ErrorStatus.valueOf(errorMessage);
+        } catch (IllegalArgumentException ex) {
+            log.warn("Invalid error status '{}', using default: {}", errorMessage, defaultStatus);
+            return defaultStatus;
+        }
     }
 }

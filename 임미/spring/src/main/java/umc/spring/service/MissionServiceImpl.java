@@ -23,10 +23,9 @@ public class MissionServiceImpl implements MissionService {
     private final StoreRepository storeRepository;
 
     @Override
-    public MissionDTO.MissionResponseDTO saveMission(MissionDTO.MissionRequestDTO request,
-                                                     Long storeId){
+    public MissionDTO.MissionResponseDTO saveMission(MissionDTO.MissionRequestDTO request){
 
-        Store storeById = storeRepository.findById(storeId)
+        Store storeById = storeRepository.findById(request.getStoreId())
                 .orElseThrow(()->new RuntimeException("상점을 찾을 수 없습니다"));
 
         Mission newMission = MissionConverter.toMission(request,storeById);

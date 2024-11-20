@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import umc.spring.validation.annotation.ExistStores;
 
 import java.time.LocalDate;
 
@@ -17,6 +18,9 @@ public class MissionDTO {
         Integer point;
 
         LocalDate deadLine;
+
+        @ExistStores
+        Long storeId;
 
     }
 
