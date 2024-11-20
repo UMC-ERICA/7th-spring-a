@@ -1,4 +1,4 @@
-package UMC.spring.web.dto;
+package UMC.spring.web.dto.memberMissionDTO;
 
 import UMC.spring.domain.enums.MissionStatus;
 import lombok.AllArgsConstructor;
