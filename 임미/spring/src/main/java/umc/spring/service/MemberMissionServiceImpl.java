@@ -3,6 +3,8 @@ package umc.spring.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import umc.spring.converter.MemberMissionConverter;
+import umc.spring.converter.MissionConverter;
 import umc.spring.domain.member.Member;
 import umc.spring.domain.mission.MemberMission;
 import umc.spring.domain.mission.Mission;
@@ -33,12 +35,7 @@ public class MemberMissionServiceImpl implements MemberMissionService {
         Mission byId = missionRepository.findById(missionId)
                 .orElseThrow(()->new RuntimeException("미션을 찾을 수 없습니다"));
 
-        MemberMission newMission = MemberMission.builder()
-                .status(Boolean.FALSE)
-                .uuid(UUID.randomUUID().toString())
-                .member(memberById)
-                .mission(byId)
-                .build();
+        MemberMission newMission = MemberMissionConverter.convert(byId,memberById);
 
         missionMissionRepository.save(newMission);
 
