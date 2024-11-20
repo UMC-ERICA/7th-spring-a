@@ -3,6 +3,8 @@ package umc.spring.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import umc.spring.converter.ReviewConverter;
+import umc.spring.converter.StoreConverter;
 import umc.spring.domain.Review;
 import umc.spring.domain.member.Member;
 import umc.spring.domain.store.Store;
@@ -33,13 +35,7 @@ public class ReviewServiceImpl implements ReviewService {
         Store storeById = storeRepository.findById(storeId)
                 .orElseThrow(()->new RuntimeException("상점을 찾을 수 없습니다"));
 
-
-        Review review = Review.builder()
-                .content(request.getContent())
-                .score(request.getScore())
-                .member(memberById)
-                .store(storeById)
-                .build();
+        Review review = ReviewConverter.toReview(request, memberById, storeById);
 
         reviewRepository.save(review);
 
