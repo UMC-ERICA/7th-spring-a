@@ -3,6 +3,8 @@ package umc.spring.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import umc.spring.converter.AddressConverter;
+import umc.spring.converter.StoreConverter;
 import umc.spring.domain.member.Address;
 import umc.spring.domain.store.Store;
 import umc.spring.repository.AddressRepository;
@@ -20,25 +22,14 @@ public class StoreServiceImpl implements StoreService {
     @Override
     public StoreDTO.StoreSaveResponseDTO save(StoreDTO.StoreSaveRequestDTO request) {
 
-        Store newStore = Store.builder()
-                .name(request.getName())
-                .score(0)
-                .status(Boolean.TRUE)
-                .startTime(request.getStartTime())
-                .endTime(request.getEndTime())
-                .build();
+        Store newStore = StoreConverter.toStore(request);
 
-        Address newAddress = Address.builder()
-                .province(request.getProvince())
-                .city(request.getCity())
-                .town(request.getTown())
-                .details(request.getDetail())
-                .store(newStore)
-                .build();
+        Address newAddress = AddressConverter.toAddress(request,newStore);
 
         newStore.setAddress(newAddress);
 
         addressRepository.save(newAddress);
+
         storeRepository.save(newStore);
 
         return StoreDTO.StoreSaveResponseDTO.builder()
