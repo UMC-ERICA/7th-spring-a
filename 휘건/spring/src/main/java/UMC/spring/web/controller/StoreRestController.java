@@ -1,13 +1,18 @@
 package UMC.spring.web.controller;
 
 import UMC.spring.api.ApiResponse;
+import UMC.spring.converter.MissionConverter;
 import UMC.spring.converter.ReviewConverter;
 import UMC.spring.converter.StoreConverter;
+import UMC.spring.domain.Mission;
 import UMC.spring.domain.Review;
 import UMC.spring.domain.Store;
+import UMC.spring.service.missionService.MissionCommandService;
 import UMC.spring.service.reviewService.ReviewCommandService;
 import UMC.spring.service.storeService.StoreCommandService;
 import UMC.spring.validation.annotation.ExistStore;
+import UMC.spring.web.dto.missionDTO.MissionRequestDTO;
+import UMC.spring.web.dto.missionDTO.MissionResponseDTO;
 import UMC.spring.web.dto.reviewDTO.ReviewRequestDTO;
 import UMC.spring.web.dto.reviewDTO.ReviewResponseDTO;
 import UMC.spring.web.dto.storeDTO.StoreRequestDTO;
@@ -26,6 +31,7 @@ public class StoreRestController {
 
     private final StoreCommandService storeCommandService;
     private final ReviewCommandService reviewCommandService;
+    private final MissionCommandService missionCommandService;
 
     @PostMapping("/")
     public ApiResponse<StoreResponseDTO.CreateStoreResultDTO> createStore(@RequestBody @Valid StoreRequestDTO.CreateStoreDTO request) {
@@ -41,5 +47,14 @@ public class StoreRestController {
             ) {
         Review review = reviewCommandService.CreateReview(request, storeId);
         return ApiResponse.onSuccess(ReviewConverter.toCreateReviewResultDTO(review));
+    }
+
+    @PostMapping("/{storeId}/missions")
+    public ApiResponse<MissionResponseDTO.CreateMissionResultDTO> createMission(
+            @RequestBody @Valid MissionRequestDTO.CreateMissionDTO request,
+            @PathVariable @ExistStore Long storeId
+            ) {
+        Mission mission = missionCommandService.CreateMission(request, storeId);
+        return ApiResponse.onSuccess(MissionConverter.toCreateMissionResultDTO(mission));
     }
 }
