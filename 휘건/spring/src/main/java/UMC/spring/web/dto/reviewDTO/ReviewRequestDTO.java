@@ -10,7 +10,7 @@ public class ReviewRequestDTO {
     @Getter
     public static class CreateReviewDTO {
 
-        // JWT 사용을 안하고 있어 받아야함
+        
         @NotNull(message = "회원ID는 필수 값입니다.")
         private Long memberId;
 
