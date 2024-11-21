@@ -18,6 +18,7 @@ import umc.spring.apiPayLoad.ApiResponse;
 import umc.spring.apiPayLoad.code.ErrorReasonDTO;
 import umc.spring.apiPayLoad.code.status.ErrorStatus;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -28,16 +29,27 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler
     public ResponseEntity<Object> validation(ConstraintViolationException e, WebRequest request) {
-        log.error("Validation error: {}", e.getMessage(), e);
-
+        // 모든 에러 메시지를 추출
         String errorMessage = e.getConstraintViolations().stream()
                 .map(constraintViolation -> constraintViolation.getMessage())
                 .findFirst()
                 .orElse("Invalid input");
 
+        // ErrorStatus 결정 (기본 값은 BAD_REQUEST)
         ErrorStatus errorStatus = resolveErrorStatus(errorMessage, ErrorStatus._BAD_REQUEST);
 
-        return handleExceptionInternalConstraint(e, errorStatus, HttpHeaders.EMPTY, request);
+        // 클라이언트 응답 형식 생성
+        Map<String, Object> responseBody = new HashMap<>();
+        responseBody.put("isSuccess", false);
+        responseBody.put("code", errorStatus.name());
+        responseBody.put("message", errorStatus.getMessage());
+
+        // 에러 메시지를 result에 담음
+        Map<String, Object> result = new HashMap<>();
+        result.put("errorMessage", errorMessage);
+        responseBody.put("result", result);
+
+        return new ResponseEntity<>(responseBody, HttpStatus.BAD_REQUEST);
     }
 
     @Override
@@ -118,4 +130,6 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
             return defaultStatus;
         }
     }
+
+
 }

@@ -1,6 +1,7 @@
 package umc.spring.web.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import umc.spring.apiPayLoad.ApiResponse;
 import umc.spring.service.ReviewService;
@@ -10,6 +11,7 @@ import umc.spring.web.dto.ReviewDTO;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/reviews")
+@Validated
 public class ReviewController {
 
     private final ReviewService reviewService;
@@ -17,7 +19,7 @@ public class ReviewController {
     @PostMapping("/{storeId}/{memberId}")
     public ApiResponse<ReviewDTO.ReviewSaveResponseDTO> save(@RequestBody ReviewDTO.ReviewSaveRequestDTO requestDTO,
                                                              @PathVariable Long memberId,
-                                                             @PathVariable @ExistStores Long storeId) {
+                                                             @ExistStores @PathVariable Long storeId) {
 
         ReviewDTO.ReviewSaveResponseDTO result = reviewService.addReview(requestDTO, memberId, storeId);
 

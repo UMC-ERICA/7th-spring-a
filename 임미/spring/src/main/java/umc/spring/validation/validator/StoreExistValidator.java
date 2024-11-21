@@ -23,22 +23,15 @@ public class StoreExistValidator implements ConstraintValidator<ExistStores, Lon
 
     @Override
     public boolean isValid(Long values, ConstraintValidatorContext context) {
-        try {
-            if (values == null) {
-                context.disableDefaultConstraintViolation();
-                context.buildConstraintViolationWithTemplate(ErrorStatus.STORE_NOT_FOUND.getMessage()).addConstraintViolation();
-                return false;
-            }
 
-            boolean isValid = storeRepository.existsById(values);
-            if (!isValid) {
-                context.disableDefaultConstraintViolation();
-                context.buildConstraintViolationWithTemplate(ErrorStatus.STORE_NOT_FOUND.getMessage()).addConstraintViolation();
-            }
+        boolean isValid = storeRepository.existsById(values);
 
-            return isValid;
-        } catch (Exception ex) {
-            return false;
+        if (!isValid) {
+            context.disableDefaultConstraintViolation();
+            context.buildConstraintViolationWithTemplate(ErrorStatus.STORE_NOT_FOUND.getMessage()).addConstraintViolation();
         }
+
+        return isValid;
+
     }
 }
