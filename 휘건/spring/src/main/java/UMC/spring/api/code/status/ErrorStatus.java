@@ -27,6 +27,10 @@ public enum ErrorStatus implements BaseErrorCode {
     //음식 카테고리 에러
     FOOD_CATEGORY_NOT_FOUND(HttpStatus.BAD_REQUEST, "PREFER4001", "알맞지 않은 음식 카테고리입니다."),
 
+    //미션 관련 에러
+    MISSION_NOT_FOUND(HttpStatus.BAD_REQUEST,"MISSION4001", "해당 미션은 존재하지 않습니다."),
+    MISSION_NOT_BELONGS_TO_STORE(HttpStatus.BAD_REQUEST, "MISSION4002", "지정된 가게에 해당 미션이 없습니다."),
+
 
     // 지역 관련 에러
     REGION_NOT_FOUND(HttpStatus.BAD_REQUEST,"REGION4001", "해당 주소는 존재하지 않습니다.")
