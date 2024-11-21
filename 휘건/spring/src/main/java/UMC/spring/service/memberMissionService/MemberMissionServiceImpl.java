@@ -7,6 +7,7 @@ import UMC.spring.api.exception.handler.StoreHandler;
 import UMC.spring.domain.Member;
 import UMC.spring.domain.Mission;
 import UMC.spring.domain.Store;
+import UMC.spring.domain.enums.MissionStatus;
 import UMC.spring.domain.mapping.MemberMission;
 import UMC.spring.repository.memberMissionRepository.MemberMissionRepository;
 import UMC.spring.repository.memberRepository.MemberRepository;
@@ -22,7 +23,7 @@ public class MemberMissionServiceImpl implements MemberMissionService {
     private final MemberMissionRepository memberMissionRepository;
     private final MemberRepository memberRepository;
     private final MissionRepository missionRepository;
-    private final StoreRepository storeRepository;
+
 
     @Override
     public MemberMission CreateMemberMission(MemberMissionRequestDTO.CreateMemberMissionDTO request, Long storeId, Long missionId) {
@@ -35,6 +36,10 @@ public class MemberMissionServiceImpl implements MemberMissionService {
 
         if (!missionRepository.existsByIdAndStoreId(missionId, storeId)) {
             throw new MissionHandler(ErrorStatus.MISSION_NOT_BELONGS_TO_STORE);
+        }
+
+        if (memberMissionRepository.existsByMemberIdAndMissionIdAndMissionStatus(member.getId(), missionId, MissionStatus.IN_PROGRESS)) {
+            throw new MissionHandler(ErrorStatus.DUPLICATE_MISSION_IN_PROGRESS); // 커스텀 예외
         }
 
         MemberMission memberMission = MemberMission.builder()
