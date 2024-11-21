@@ -2,6 +2,8 @@ package UMC.spring.web.dto.missionDTO;
 
 import lombok.Getter;
 
+import java.time.LocalDate;
+
 
 public class MissionRequestDTO {
 
@@ -11,6 +13,8 @@ public class MissionRequestDTO {
         String content;
 
         Integer reward;
+
+        LocalDate expirationDate;
 
     }
 
