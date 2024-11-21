@@ -16,6 +16,7 @@ public class MemberMissionConverter {
                 .memberMissionId(memberMission.getId())
                 .memberId(memberMission.getId())
                 .storeId(memberMission.getMission().getStore().getId())
+                .storeName(memberMission.getMission().getStore().getStoreName())
                 .storeCategory(memberMission.getMission().getStore().getStoreCategory().toString())
                 .missionId(memberMission.getMission().getId())
                 .content(memberMission.getMission().getContent())
