@@ -6,6 +6,7 @@ import UMC.spring.domain.mapping.MemberMission;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +27,9 @@ public class Mission extends BaseEntity {
 
     @Column(nullable = false)
     private Integer rewardPoint;
+
+    @Column(nullable = false)
+    private LocalDate expirationDate;
 
     // MemberMission OTM
     @OneToMany(mappedBy = "mission", cascade = CascadeType.ALL)

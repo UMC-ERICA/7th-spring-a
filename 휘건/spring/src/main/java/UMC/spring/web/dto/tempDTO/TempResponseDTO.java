@@ -1,11 +1,11 @@
-package UMC.spring.web.dto.temp;
+package UMC.spring.web.dto.tempDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-public class TempResponse {
+public class TempResponseDTO {
 
     @NoArgsConstructor
     @AllArgsConstructor

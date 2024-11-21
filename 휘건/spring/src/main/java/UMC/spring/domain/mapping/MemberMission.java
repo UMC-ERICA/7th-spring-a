@@ -7,6 +7,8 @@ import UMC.spring.domain.baseEntity.BaseEntity;
 import UMC.spring.domain.enums.MissionStatus;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -31,4 +33,11 @@ public class MemberMission extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mission_id")
     private Mission mission;
+
+    @PrePersist
+    public void prePersist() {
+        if (this.missionStatus == null) {
+            this.missionStatus = MissionStatus.IN_PROGRESS;
+        }
+    }
 }
