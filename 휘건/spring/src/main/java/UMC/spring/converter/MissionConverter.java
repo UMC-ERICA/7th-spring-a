@@ -22,6 +22,7 @@ public class MissionConverter {
         return Mission.builder()
                 .content(request.getContent())
                 .rewardPoint(request.getReward())
+                .expirationDate(request.getExpirationDate())
                 .store(store)
                 .build();
     }
