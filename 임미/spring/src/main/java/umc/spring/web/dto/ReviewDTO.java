@@ -1,5 +1,7 @@
 package umc.spring.web.dto;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,6 +14,8 @@ public class ReviewDTO {
 
         String content;
 
+        @Min(0)
+        @Max(5)
         Integer score;
 
     }
