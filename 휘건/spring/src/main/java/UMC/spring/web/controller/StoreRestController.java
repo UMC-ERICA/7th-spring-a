@@ -1,16 +1,22 @@
 package UMC.spring.web.controller;
 
 import UMC.spring.api.ApiResponse;
+import UMC.spring.converter.MemberMissionConverter;
 import UMC.spring.converter.MissionConverter;
 import UMC.spring.converter.ReviewConverter;
 import UMC.spring.converter.StoreConverter;
 import UMC.spring.domain.Mission;
 import UMC.spring.domain.Review;
 import UMC.spring.domain.Store;
+import UMC.spring.domain.mapping.MemberMission;
+import UMC.spring.service.memberMissionService.MemberMissionService;
 import UMC.spring.service.missionService.MissionCommandService;
 import UMC.spring.service.reviewService.ReviewCommandService;
 import UMC.spring.service.storeService.StoreCommandService;
+import UMC.spring.validation.annotation.ExistMission;
 import UMC.spring.validation.annotation.ExistStore;
+import UMC.spring.web.dto.memberMissionDTO.MemberMissionRequestDTO;
+import UMC.spring.web.dto.memberMissionDTO.MemberMissionResponseDTO;
 import UMC.spring.web.dto.missionDTO.MissionRequestDTO;
 import UMC.spring.web.dto.missionDTO.MissionResponseDTO;
 import UMC.spring.web.dto.reviewDTO.ReviewRequestDTO;
@@ -32,6 +38,7 @@ public class StoreRestController {
     private final StoreCommandService storeCommandService;
     private final ReviewCommandService reviewCommandService;
     private final MissionCommandService missionCommandService;
+    private final MemberMissionService memberMissionService;
 
     @PostMapping("/")
     public ApiResponse<StoreResponseDTO.CreateStoreResultDTO> createStore(@RequestBody @Valid StoreRequestDTO.CreateStoreDTO request) {
@@ -56,5 +63,15 @@ public class StoreRestController {
             ) {
         Mission mission = missionCommandService.CreateMission(request, storeId);
         return ApiResponse.onSuccess(MissionConverter.toCreateMissionResultDTO(mission));
+    }
+
+    @PostMapping("/{storeId}/missions/{missionId}/challenge")
+    public ApiResponse<MemberMissionResponseDTO.CreateMemberMissionResultDTO> createMemberMission(
+            @RequestBody @Valid MemberMissionRequestDTO.CreateMemberMissionDTO request,
+            @PathVariable @ExistStore Long storeId,
+            @PathVariable @ExistMission Long missionId
+            ) {
+        MemberMission memberMission = memberMissionService.CreateMemberMission(request, storeId, missionId);
+        return ApiResponse.onSuccess(MemberMissionConverter.toCreateMemberMissionResultDTO(memberMission));
     }
 }
