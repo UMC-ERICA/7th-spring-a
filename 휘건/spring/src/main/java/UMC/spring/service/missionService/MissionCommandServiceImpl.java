@@ -29,4 +29,12 @@ public class MissionCommandServiceImpl implements MissionCommandService{
 
         return missionRepository.save(mission);
     }
+
+    @Override
+    public Boolean isMissionExist(Long missionId) {
+        return missionRepository.existsById(missionId);
+    }
+
+
+
 }

@@ -7,4 +7,6 @@ public interface MissionCommandService {
 
     Mission CreateMission(MissionRequestDTO.CreateMissionDTO request, Long storeId);
 
+    Boolean isMissionExist(Long missionId);
+
 }
