@@ -34,4 +34,7 @@ public class Address extends BaseEntity {
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Store store;
+
+
+
 }
