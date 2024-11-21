@@ -1,12 +1,11 @@
 package UMC.spring.repository.memberMissionRepository;
 
-import UMC.spring.domain.Mission;
 import UMC.spring.domain.QMember;
 import UMC.spring.domain.QMission;
 import UMC.spring.domain.QStore;
 import UMC.spring.domain.enums.MissionStatus;
 import UMC.spring.domain.mapping.QMemberMission;
-import UMC.spring.web.dto.MemberMissionDTO;
+import UMC.spring.web.dto.memberMissionDTO.MemberMissionDTO;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.JPAExpressions;

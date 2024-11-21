@@ -2,8 +2,7 @@ package UMC.spring.repository.memberMissionRepository;
 
 
 import UMC.spring.domain.enums.MissionStatus;
-import UMC.spring.domain.mapping.MemberMission;
-import UMC.spring.web.dto.MemberMissionDTO;
+import UMC.spring.web.dto.memberMissionDTO.MemberMissionDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
