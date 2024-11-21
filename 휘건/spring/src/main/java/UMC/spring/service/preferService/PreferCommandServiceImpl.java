@@ -11,7 +11,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PreferCommandServiceImpl implements PreferCommandService {
 
-    private PreferRepository preferRepository;
+    private final PreferRepository preferRepository;
 
     @Override
     public Boolean areCategoriesExist(List<Long> categoryIds) {
