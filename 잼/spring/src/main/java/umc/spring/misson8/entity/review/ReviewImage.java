@@ -1,14 +1,14 @@
-package umc.spring.misson5_homework.entity.review;
+package umc.spring.misson8.entity.review;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "review_image")
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ReviewImage {
 
     @Id
@@ -20,6 +20,7 @@ public class ReviewImage {
     private Review review;
 
     @Column(nullable = false)
+    @Setter
     private String reviewPath;
 
 }
