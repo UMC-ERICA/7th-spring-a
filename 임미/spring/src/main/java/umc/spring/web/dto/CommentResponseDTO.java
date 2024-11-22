@@ -9,29 +9,16 @@ import umc.spring.domain.ReviewComment;
 import java.time.LocalDate;
 import java.util.List;
 
-public class ReviewResponseDTO {
+public class CommentResponseDTO {
 
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
     @Getter
-    public static class MyReviewResponseDTO{
+    public static class MyReviewCommentResponseDTO{
 
-        String nickname;
-
-        Integer score;
-
-        String content;
+        String comment;
 
         LocalDate createdAt;
-
-        List<CommentResponseDTO.MyReviewCommentResponseDTO> reviewComments;
-
-        List<String> reviewImagePath;
     }
-
-
-
-
-
 }
