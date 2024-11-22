@@ -2,6 +2,7 @@ package umc.spring.domain.store;
 
 import jakarta.persistence.*;
 import lombok.*;
+import umc.spring.domain.ReviewComment;
 import umc.spring.domain.mission.Mission;
 import umc.spring.domain.member.Address;
 
@@ -42,6 +43,7 @@ public class Store {
 
     @OneToMany(mappedBy = "store")
     private List<Mission> missions=new ArrayList<>();
+
 
 
     @Override

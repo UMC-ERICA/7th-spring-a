@@ -36,4 +36,7 @@ public class Review extends BaseEntity {
     @OneToMany(mappedBy = "review",cascade = CascadeType.ALL)
     private List<ReviewImages> reviewImages=new ArrayList<>();
 
+    @OneToMany(mappedBy = "review")
+    private List<ReviewComment> reviewComments=new ArrayList<>();
+
 }
