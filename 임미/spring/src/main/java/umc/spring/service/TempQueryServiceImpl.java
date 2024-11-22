@@ -1,12 +1,14 @@
 package umc.spring.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import umc.spring.apiPayLoad.code.status.ErrorStatus;
 import umc.spring.apiPayLoad.exception.handler.TempHandler;
 
 @Service
 @RequiredArgsConstructor
+@Primary
 public class TempQueryServiceImpl implements TempQueryService{
 
     @Override

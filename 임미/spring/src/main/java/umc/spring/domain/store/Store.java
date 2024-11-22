@@ -53,4 +53,11 @@ public class Store {
                 ", score=" + score +
                 '}';
     }
+
+
+    public void setAddress(Address address) {
+        if (address != null) {
+            this.address = address;
+        }
+    }
 }
