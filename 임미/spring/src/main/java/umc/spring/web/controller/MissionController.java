@@ -15,7 +15,7 @@ public class MissionController {
 
     private final MissionService missionService;
 
-    @PostMapping("/{storeId}")
+    @PostMapping("/storeId/{storeId}")
     public ApiResponse<MissionDTO.MissionResponseDTO> saveMission(@RequestBody @Valid MissionDTO.MissionRequestDTO request){
 
         MissionDTO.MissionResponseDTO result = missionService.saveMission(request);

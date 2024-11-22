@@ -16,7 +16,7 @@ public class MemberMissionController {
 
     private final MemberMissionService memberMissionService;
 
-    @PostMapping("/{missionId}/{memberId}")
+    @PostMapping("/missionId/{missionId}/memberId/{memberId}")
     public ApiResponse<MemberResponseDTO.MemberMissionResponseDTO> addMemberMission(@PathVariable Long missionId,
                                                                                     @PathVariable Long memberId) {
 

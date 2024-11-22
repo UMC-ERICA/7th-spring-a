@@ -16,7 +16,7 @@ public class ReviewController {
 
     private final ReviewService reviewService;
 
-    @PostMapping("/{storeId}/{memberId}")
+    @PostMapping("/storeId/{storeId}/memberId/{memberId}")
     public ApiResponse<ReviewDTO.ReviewSaveResponseDTO> save(@RequestBody ReviewDTO.ReviewSaveRequestDTO requestDTO,
                                                              @PathVariable Long memberId,
                                                              @ExistStores @PathVariable Long storeId) {
