@@ -1,5 +1,6 @@
 package umc.spring.web.controller;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -25,4 +26,10 @@ public class ReviewController {
 
         return ApiResponse.onSuccess(result);
     }
+
+
+    // 특정 가게의 리뷰
+
+
+    // 내가 작성한 리뷰 목록
 }
