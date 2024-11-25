@@ -1,12 +1,11 @@
 package umc.spring.example.domain.mapping;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import umc.spring.example.base.BaseEntity;
 import umc.spring.example.domain.Member;
+
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -29,6 +28,14 @@ public class Review extends BaseEntity {
     private String content;
 
     private int rating;
+
+    @Column(nullable = false)
+    @Setter
+    private String body; // 본문 내용
+
+    @Setter
+    private float score; // 별점
+
 
     @Builder
     public Review(Member member,Store store, String content, int rating) {
