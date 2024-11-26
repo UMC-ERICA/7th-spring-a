@@ -7,6 +7,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 public class ReviewDTO {
 
     @Getter
@@ -28,6 +31,36 @@ public class ReviewDTO {
     public static class ReviewSaveResponseDTO{
 
         Long id;
+    }
 
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class ReviewResponseDTO{
+
+        Long reviewId;
+
+        String nickname;
+
+        String content;
+
+        LocalDateTime createdAt;
+
+        List<ReviewImageResponseDTO> reviewImages;
+
+        List<CommentResponseDTO.MyReviewCommentResponseDTO> reviewComments;
+
+    }
+
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class ReviewImageResponseDTO{
+
+        String imagePath;
     }
 }

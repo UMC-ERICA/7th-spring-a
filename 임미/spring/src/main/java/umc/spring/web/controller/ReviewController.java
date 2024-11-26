@@ -1,6 +1,7 @@
 package umc.spring.web.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
@@ -11,13 +12,19 @@ import umc.spring.validation.annotation.ExistStores;
 import umc.spring.web.dto.ReviewDTO;
 import umc.spring.web.dto.ReviewResponseDTO;
 
+import java.util.List;
+
+import static org.eclipse.jdt.internal.compiler.parser.Parser.name;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/reviews")
-@Validated
+@Tag(name = "리뷰관련 API")
 public class ReviewController {
 
+
     private final ReviewService reviewService;
+
 
     @PostMapping("/storeId/{storeId}/memberId/{memberId}")
     public ApiResponse<ReviewDTO.ReviewSaveResponseDTO> save(@RequestBody ReviewDTO.ReviewSaveRequestDTO requestDTO,
@@ -41,10 +48,12 @@ public class ReviewController {
     // 내가 작성한 리뷰 목록
     @Operation(summary = "내가 작성한 리뷰 목록 조회 API")
     @GetMapping("/storeId/{storeId}/memberId/{memberId}")
-    private void getReviewStore(@PathVariable Long storeId,
-                                @PathVariable Long memberId) {
+    private ApiResponse<List<ReviewDTO.ReviewResponseDTO>> getReviewStore(@PathVariable Long storeId,
+                                                                    @PathVariable Long memberId,
+                                                                    @RequestParam Integer page) {
 
+        List<ReviewDTO.ReviewResponseDTO> result = reviewService.findReviewById(memberId, storeId, page);
 
-
+        return ApiResponse.onSuccess(result);
     }
 }

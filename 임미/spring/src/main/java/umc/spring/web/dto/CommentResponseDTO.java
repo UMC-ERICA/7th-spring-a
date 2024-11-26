@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import umc.spring.domain.ReviewComment;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class CommentResponseDTO {
@@ -19,6 +20,6 @@ public class CommentResponseDTO {
 
         String comment;
 
-        LocalDate createdAt;
+        LocalDateTime createdAt;
     }
 }
