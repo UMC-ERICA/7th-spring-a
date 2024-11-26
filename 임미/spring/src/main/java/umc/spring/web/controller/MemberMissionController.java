@@ -25,6 +25,20 @@ public class MemberMissionController {
 
 
     // 내가 진행중인 리뷰
+    @Operation(summary = "내가 진행중인 리뷰 조회 API")
+    @GetMapping("/missionId/{missionId}/memberId/{memberId}")
+    public void getMyReview(@PathVariable Long missionId,
+                            @PathVariable Long memberId){
+
+
+
+    }
+
 
     // 진행중인 미션 진행 완료로 바꾸기
+    @Operation(summary = "진행중인 미션 진행 완료로 바꾸기 API")
+    @PostMapping("/toggle/missionId/{missionId}/memberId/{memberId}")
+    public void changeReviewStatus(@PathVariable Long missionId,
+                            @PathVariable Long memberId){
+    }
 }

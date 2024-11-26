@@ -1,5 +1,6 @@
 package umc.spring.web.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
@@ -8,6 +9,7 @@ import umc.spring.apiPayLoad.ApiResponse;
 import umc.spring.service.ReviewService;
 import umc.spring.validation.annotation.ExistStores;
 import umc.spring.web.dto.ReviewDTO;
+import umc.spring.web.dto.ReviewResponseDTO;
 
 @RequiredArgsConstructor
 @RestController
@@ -29,7 +31,20 @@ public class ReviewController {
 
 
     // 특정 가게의 리뷰
+    @Operation(summary = "특정 가게의 리뷰 조회 API")
+    @GetMapping("/storeId/{storeId}")
+    private void getReviewStore(@PathVariable Long storeId) {
+
+    }
 
 
     // 내가 작성한 리뷰 목록
+    @Operation(summary = "내가 작성한 리뷰 목록 조회 API")
+    @GetMapping("/storeId/{storeId}/memberId/{memberId}")
+    private void getReviewStore(@PathVariable Long storeId,
+                                @PathVariable Long memberId) {
+
+
+
+    }
 }
