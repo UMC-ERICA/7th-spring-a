@@ -27,29 +27,24 @@ import java.util.Optional;
 @RestControllerAdvice(annotations = {RestController.class})
 public class ExceptionAdvice extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler
-    public ResponseEntity<Object> validation(ConstraintViolationException e, WebRequest request) {
-        // 모든 에러 메시지를 추출
-        String errorMessage = e.getConstraintViolations().stream()
-                .map(constraintViolation -> constraintViolation.getMessage())
-                .findFirst()
-                .orElse("Invalid input");
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<Object> handleConstraintViolation(ConstraintViolationException e) {
+        // 모든 오류 메시지 수집
+        Map<String, String> errors = new LinkedHashMap<>();
+        e.getConstraintViolations().forEach(violation -> {
+            String fieldName = violation.getPropertyPath().toString(); // 필드 이름 추출
+            String errorMessage = violation.getMessage(); // 어노테이션의 message 속성 값
+            errors.put(fieldName, errorMessage);
+        });
 
-        // ErrorStatus 결정 (기본 값은 BAD_REQUEST)
-        ErrorStatus errorStatus = resolveErrorStatus(errorMessage, ErrorStatus._BAD_REQUEST);
+        // ApiResponse 형식으로 클라이언트에 반환
+        ApiResponse<Object> response = ApiResponse.onFailure(
+                ErrorStatus._BAD_REQUEST.getCode(),
+                "Validation failure",
+                errors
+        );
 
-        // 클라이언트 응답 형식 생성
-        Map<String, Object> responseBody = new HashMap<>();
-        responseBody.put("isSuccess", false);
-        responseBody.put("code", errorStatus.name());
-        responseBody.put("message", errorStatus.getMessage());
-
-        // 에러 메시지를 result에 담음
-        Map<String, Object> result = new HashMap<>();
-        result.put("errorMessage", errorMessage);
-        responseBody.put("result", result);
-
-        return new ResponseEntity<>(responseBody, HttpStatus.BAD_REQUEST);
+        return ResponseEntity.badRequest().body(response);
     }
 
     @Override
