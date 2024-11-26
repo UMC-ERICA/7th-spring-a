@@ -13,5 +13,6 @@ import java.util.List;
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, Long>,ReviewRepositoryCustom {
 
+    // n+1 발생
     Page<Review> findByMemberAndStore(Member member, Store store, Pageable pageable);
 }

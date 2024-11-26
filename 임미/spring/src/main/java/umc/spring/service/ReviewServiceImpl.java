@@ -74,27 +74,9 @@ public class ReviewServiceImpl implements ReviewService {
         // 3. Page<Review> 조회
         Page<Review> reviews = reviewRepository.findByMemberAndStore(findMember, findStore, pageable);
 
-        List<ReviewDTO.ReviewResponseDTO> result = reviews.stream().map(
-                        review -> ReviewDTO.ReviewResponseDTO.builder()
-                                .reviewId(review.getId())
-                                .nickname(review.getMember().getName())
-                                .content(review.getContent())
-                                .createdAt(review.getCreatedAt())
-                                .reviewImages(review.getReviewImages().stream()
-                                        .map(reviewImage -> ReviewDTO.ReviewImageResponseDTO.builder()
-                                                .imagePath(reviewImage.getPath() != null ? reviewImage.getPath() : "default Image")
-                                                .build())
-                                        .collect(Collectors.toList()))
-                                .reviewComments(review.getReviewComments().stream()
-                                        .map(reviewComment -> CommentResponseDTO.MyReviewCommentResponseDTO.builder()
-                                                .comment(reviewComment.getContent())
-                                                .createdAt(review.getCreatedAt())
-                                                .build())
-                                        .collect(Collectors.toList())).build())
-                .collect(Collectors.toList());
+        List<ReviewDTO.ReviewResponseDTO> result = ReviewConverter.toReviewResponseDTO(reviews);
 
         return result;
-
 
     }
 }
