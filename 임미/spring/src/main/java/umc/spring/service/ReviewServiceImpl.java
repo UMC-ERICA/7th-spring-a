@@ -16,11 +16,9 @@ import umc.spring.domain.store.Store;
 import umc.spring.repository.memberRepository.MemberRepository;
 import umc.spring.repository.reviewRepository.ReviewRepository;
 import umc.spring.repository.storeRepository.StoreRepository;
-import umc.spring.web.dto.CommentResponseDTO;
 import umc.spring.web.dto.ReviewDTO;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -77,6 +75,23 @@ public class ReviewServiceImpl implements ReviewService {
         List<ReviewDTO.ReviewResponseDTO> result = ReviewConverter.toReviewResponseDTO(reviews);
 
         return result;
+    }
 
+
+    @Override
+    public List<ReviewDTO.ReviewResponseDTO> findReviewByStoreId(Long storeId, Integer page){
+
+        int size=10;
+
+        Store findStore = storeRepository.findById(storeId)
+                .orElseThrow(()->new StoreCategoryHandler(ErrorStatus.STORE_NOT_FOUND));
+
+        Pageable pageable = PageRequest.of(page - 1, size);
+
+        Page<Review> findReview = reviewRepository.findByStore(findStore, pageable);
+
+        List<ReviewDTO.ReviewResponseDTO> result = ReviewConverter.toReviewResponseDTO(findReview);
+
+        return result;
     }
 }

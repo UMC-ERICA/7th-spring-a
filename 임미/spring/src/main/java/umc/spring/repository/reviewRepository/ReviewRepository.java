@@ -15,4 +15,7 @@ public interface ReviewRepository extends JpaRepository<Review, Long>,ReviewRepo
 
     // n+1 발생
     Page<Review> findByMemberAndStore(Member member, Store store, Pageable pageable);
+
+    // n+1 발생
+    Page<Review> findByStore(Store store, Pageable pageable);
 }

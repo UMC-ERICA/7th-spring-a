@@ -12,4 +12,6 @@ public interface ReviewService {
                                               Long storeId);
 
     List<ReviewDTO.ReviewResponseDTO> findReviewById(Long memberId, Long storeId, Integer page);
+
+    List<ReviewDTO.ReviewResponseDTO> findReviewByStoreId(Long storeId, Integer page);
 }

@@ -40,8 +40,12 @@ public class ReviewController {
     // 특정 가게의 리뷰
     @Operation(summary = "특정 가게의 리뷰 조회 API")
     @GetMapping("/storeId/{storeId}")
-    private void getReviewStore(@PathVariable Long storeId) {
+    private ApiResponse<List<ReviewDTO.ReviewResponseDTO>> getReviewStore(@PathVariable Long storeId,
+                                                                          @RequestParam Integer page) {
 
+        List<ReviewDTO.ReviewResponseDTO> result = reviewService.findReviewByStoreId(storeId, page);
+
+        return ApiResponse.onSuccess(result);
     }
 
 
