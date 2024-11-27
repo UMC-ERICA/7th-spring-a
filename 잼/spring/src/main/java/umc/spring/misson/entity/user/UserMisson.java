@@ -1,19 +1,21 @@
-package umc.spring.misson5_homework.entity.user;
+package umc.spring.misson.entity.user;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import umc.spring.misson5_homework.entity.mission.Misson;
-import umc.spring.misson5_homework.enums.MissonState;
+import lombok.*;
+import umc.spring.misson.base.BaseEntity;
+import umc.spring.misson.entity.mission.Misson;
+import umc.spring.misson.enums.MissonStatus;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
 @Table(name = "user_mission")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class UserMisson {
+@AllArgsConstructor
+@Builder
+public class UserMisson extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,11 +39,12 @@ public class UserMisson {
     private String content;
 
     @Column(nullable = false)
-    private Date deadline;
+    private LocalDate deadline;
 
     @Enumerated(EnumType.STRING)
-    private MissonState state;
+    private MissonStatus state;
 
-
+    @Column(nullable = false)
+    private int rating;
 
 }
