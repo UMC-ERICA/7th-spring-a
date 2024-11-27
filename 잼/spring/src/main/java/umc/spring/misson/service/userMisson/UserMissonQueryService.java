@@ -31,5 +31,8 @@ public class UserMissonQueryService {
         return userMissions.map(UserMissonFindDto::new);
     }
 
+    public void completeMisson(Long userMissonId) {
+        userMissionRepository.completeMisson(userMissonId);  // 미션 완료 상태로 변경
+    }
 
 }

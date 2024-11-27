@@ -8,5 +8,5 @@ import umc.spring.misson.enums.MissonStatus;
 
 public interface UserMissonRepositoryCustom {
     Page<UserMisson> findByTitleAndStatus(MissonStatus status, Pageable pageable);
-
+    void completeMisson(Long userMissonId);
     }
