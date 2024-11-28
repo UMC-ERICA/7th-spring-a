@@ -1,6 +1,7 @@
 package umc.spring.web.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.validation.annotation.Validated;
@@ -13,10 +14,13 @@ import umc.spring.web.dto.MissionDTO;
 
 import java.util.List;
 
+import static org.eclipse.jdt.internal.compiler.parser.Parser.name;
+
 @RestController
 @RequestMapping("/member-missions")
 @RequiredArgsConstructor
 @Validated
+@Tag(name = "회원 미션 관리 API")
 public class MemberMissionController {
 
 

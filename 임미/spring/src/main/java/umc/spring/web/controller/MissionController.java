@@ -1,5 +1,6 @@
 package umc.spring.web.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import umc.spring.web.dto.MissionDTO;
 @RestController
 @RequestMapping("/missions")
 @RequiredArgsConstructor
+@Tag(name = "미션 관리 API")
 public class MissionController {
 
     private final MissionService missionService;

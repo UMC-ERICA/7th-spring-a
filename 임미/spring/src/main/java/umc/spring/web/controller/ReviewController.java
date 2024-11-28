@@ -18,7 +18,7 @@ import static org.eclipse.jdt.internal.compiler.parser.Parser.name;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/reviews")
-@Tag(name = "리뷰관련 API")
+@Tag(name = "리뷰 관리 API")
 public class ReviewController {
 
 
