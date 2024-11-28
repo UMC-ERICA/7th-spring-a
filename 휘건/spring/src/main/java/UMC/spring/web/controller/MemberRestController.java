@@ -46,7 +46,7 @@ public class MemberRestController {
 
 
 
-    @GetMapping("/member/{memberId}/reviews")
+    @GetMapping("/{memberId}/reviews")
     @Operation(summary = "내가 작성한 리뷰 목록API", description = "멤버가 작성한 리뷰 목록을 페이징해서 조회하는 API입니다.")
     public ApiResponse<ReviewResponseDTO.ReviewPreviewListDTO> getReviewListByMember(
             @PathVariable Long memberId,
