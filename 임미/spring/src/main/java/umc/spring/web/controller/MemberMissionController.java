@@ -44,7 +44,7 @@ public class MemberMissionController {
 
 
     // 진행중인 미션 진행 완료로 바꾸기
-    @Operation(summary = "진행중인 미션 진행 완료로 바꾸기 API")
+    @Operation(summary = "진행 완료된 미션 조회 API")
     @GetMapping("/done/memberId/{memberId}")
     public ApiResponse<List<MissionDTO.MemberMissionResponseDTO>> changeReviewStatus(@PathVariable Long memberId,
                                                                                      @RequestParam Integer page){
