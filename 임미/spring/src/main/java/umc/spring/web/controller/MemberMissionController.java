@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import umc.spring.apiPayLoad.ApiResponse;
 import umc.spring.service.MemberMissionService;
+import umc.spring.validation.annotation.PageValid;
 import umc.spring.web.dto.MemberResponseDTO;
 import umc.spring.web.dto.MissionDTO;
 
@@ -34,7 +35,7 @@ public class MemberMissionController {
     @Operation(summary = "내가 진행중인 미션 조회 API")
     @GetMapping("/in-progress/memberId/{memberId}")
     public ApiResponse<List<MissionDTO.MemberMissionResponseDTO>> getMyReview(@PathVariable Long memberId,
-                                                                              @RequestParam Integer page){
+                                                                              @RequestParam @PageValid Integer page){
 
         List<MissionDTO.MemberMissionResponseDTO> result = memberMissionService.getMemberMission(memberId, page);
 
@@ -47,7 +48,7 @@ public class MemberMissionController {
     @Operation(summary = "진행 완료된 미션 조회 API")
     @GetMapping("/done/memberId/{memberId}")
     public ApiResponse<List<MissionDTO.MemberMissionResponseDTO>> changeReviewStatus(@PathVariable Long memberId,
-                                                                                     @RequestParam Integer page){
+                                                                                     @RequestParam @PageValid Integer page){
 
         List<MissionDTO.MemberMissionResponseDTO> result = memberMissionService.getMemberMissionSuccess(memberId, page);
 
