@@ -1,6 +1,6 @@
 package UMC.spring.repository.reviewRepository;
 
-public interface ReviewRepositoryCustom {
+public interface  ReviewRepositoryCustom {
 
 
 }
