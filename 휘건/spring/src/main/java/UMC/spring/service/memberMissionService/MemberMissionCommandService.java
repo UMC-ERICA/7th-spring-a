@@ -4,8 +4,10 @@ package UMC.spring.service.memberMissionService;
 import UMC.spring.domain.mapping.MemberMission;
 import UMC.spring.web.dto.memberMissionDTO.MemberMissionRequestDTO;
 
-public interface MemberMissionService {
+public interface MemberMissionCommandService {
 
-    MemberMission CreateMemberMission(MemberMissionRequestDTO.CreateMemberMissionDTO request,Long storeId, Long missionId);
+    MemberMission createMemberMission(MemberMissionRequestDTO.CreateMemberMissionDTO request, Long storeId, Long missionId);
+
+    MemberMission updateMissionStatus(Long memberId, Long missionId);
 
 }
