@@ -12,4 +12,6 @@ public interface MemberMissionService {
     MemberResponseDTO.MemberMissionResponseDTO addMemberMission(Long missionId, Long memberId);
 
     List<MissionDTO.MemberMissionResponseDTO> getMemberMission(Long memberId, Integer page);
+
+    List<MissionDTO.MemberMissionResponseDTO> getMemberMissionSuccess(Long memberId, Integer page);
 }

@@ -11,4 +11,6 @@ public interface MemberMissionRepository extends JpaRepository<MemberMission, Lo
 
     Page<MemberMission> findByMemberIdAndStatusTrue(Long memberId, Pageable pageable);
 
+    Page<MemberMission> findByMemberIdAndStatusFalse(Long memberId, Pageable pageable);
+
 }

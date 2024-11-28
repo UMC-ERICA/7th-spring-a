@@ -32,7 +32,7 @@ public class MemberMissionController {
 
     // 내가 진행중인 리뷰
     @Operation(summary = "내가 진행중인 미션 조회 API")
-    @GetMapping("/memberId/{memberId}")
+    @GetMapping("/in-progress/memberId/{memberId}")
     public ApiResponse<List<MissionDTO.MemberMissionResponseDTO>> getMyReview(@PathVariable Long memberId,
                                                                               @RequestParam Integer page){
 
@@ -45,11 +45,13 @@ public class MemberMissionController {
 
     // 진행중인 미션 진행 완료로 바꾸기
     @Operation(summary = "진행중인 미션 진행 완료로 바꾸기 API")
-    @PostMapping("/toggle/missionId/{missionId}/memberId/{memberId}")
-    public void changeReviewStatus(@PathVariable Long missionId,
-                            @PathVariable Long memberId){
+    @GetMapping("/done/memberId/{memberId}")
+    public ApiResponse<List<MissionDTO.MemberMissionResponseDTO>> changeReviewStatus(@PathVariable Long memberId,
+                                                                                     @RequestParam Integer page){
 
+        List<MissionDTO.MemberMissionResponseDTO> result = memberMissionService.getMemberMissionSuccess(memberId, page);
 
+        return ApiResponse.onSuccess(result);
 
     }
 }

@@ -69,4 +69,24 @@ public class MemberMissionServiceImpl implements MemberMissionService {
         return response;
     }
 
+
+    @Override
+    public List<MissionDTO.MemberMissionResponseDTO> getMemberMissionSuccess(Long memberId, Integer page){
+
+        int size=10;
+
+        Pageable pageable = PageRequest.of(page - 1, size);
+
+        Page<MemberMission> findMemberMissions = memberMissionRepository.findByMemberIdAndStatusFalse(memberId,pageable);
+
+        List<Mission> findMissions = findMemberMissions.stream().map(
+                        findMission -> missionRepository.findById(findMission.getId())
+                                .orElseThrow(()->new MissionCategoryHandler(ErrorStatus.MISSION_NOT_FOUND)))
+                .collect(Collectors.toList());
+
+        List<MissionDTO.MemberMissionResponseDTO> response = MemberMissionConverter.toMissionDTO(findMissions);
+
+        return response;
+    }
+
 }
