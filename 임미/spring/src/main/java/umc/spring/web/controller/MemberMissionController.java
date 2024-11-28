@@ -3,6 +3,7 @@ package umc.spring.web.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import umc.spring.apiPayLoad.ApiResponse;
 import umc.spring.service.MemberMissionService;
@@ -15,6 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/member-missions")
 @RequiredArgsConstructor
+@Validated
 public class MemberMissionController {
 
 

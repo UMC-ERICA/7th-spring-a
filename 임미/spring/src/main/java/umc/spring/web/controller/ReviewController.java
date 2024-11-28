@@ -39,7 +39,6 @@ public class ReviewController {
     // 특정 가게의 리뷰
     @Operation(summary = "특정 가게의 리뷰 조회 API")
     @GetMapping("/storeId/{storeId}")
-    @Validated
     private ApiResponse<List<ReviewDTO.ReviewResponseDTO>> getReviewStore(@PathVariable Long storeId,
                                                                           @RequestParam(name = "page") @PageValid Integer page) {
 
@@ -52,7 +51,6 @@ public class ReviewController {
     // 내가 작성한 리뷰 목록
     @Operation(summary = "내가 작성한 리뷰 목록 조회 API")
     @GetMapping("/storeId/{storeId}/memberId/{memberId}")
-    @Validated
     private ApiResponse<List<ReviewDTO.ReviewResponseDTO>> getReviewStore(@PathVariable Long storeId,
                                                                           @PathVariable Long memberId,
                                                                           @RequestParam(name = "page") @PageValid Integer page) {

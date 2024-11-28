@@ -58,9 +58,11 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
             errors.merge(fieldName, errorMessage, (existing, newMsg) -> existing + ", " + newMsg);
         });
 
-        ApiResponse<Object> body = ApiResponse.onFailure(ErrorStatus._BAD_REQUEST.getCode(),
+        ApiResponse<Object> body = ApiResponse.onFailure(
+                ErrorStatus._BAD_REQUEST.getCode(),
                 ErrorStatus._BAD_REQUEST.getMessage(),
-                errors);
+                errors
+        );
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).headers(headers).body(body);
     }
