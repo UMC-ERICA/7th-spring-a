@@ -64,14 +64,7 @@ public class MemberMissionServiceImpl implements MemberMissionService {
                                 .orElseThrow(()->new MissionCategoryHandler(ErrorStatus.MISSION_NOT_FOUND)))
                 .collect(Collectors.toList());
 
-        List<MissionDTO.MemberMissionResponseDTO> response = findMissions.stream().map(
-                        findMission-> MissionDTO.MemberMissionResponseDTO.builder()
-                                .missionId(findMission.getId())
-                                .content(findMission.getContent())
-                                .point(findMission.getPoint())
-                                .build())
-                .collect(Collectors.toList());
-
+        List<MissionDTO.MemberMissionResponseDTO> response = MemberMissionConverter.toMissionDTO(findMissions);
 
         return response;
     }
