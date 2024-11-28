@@ -30,6 +30,23 @@ public class MissionDTO {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class MissionResponseDTO{
+
         Long id;
+
+    }
+
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class MemberMissionResponseDTO{
+
+        Long missionId;
+
+        String content;
+
+        Integer point;
+
     }
 }

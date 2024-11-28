@@ -1,10 +1,14 @@
 package umc.spring.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import umc.spring.apiPayLoad.code.status.ErrorStatus;
+import umc.spring.apiPayLoad.exception.handler.MissionCategoryHandler;
 import umc.spring.converter.MemberMissionConverter;
-import umc.spring.converter.MissionConverter;
 import umc.spring.domain.member.Member;
 import umc.spring.domain.mission.MemberMission;
 import umc.spring.domain.mission.Mission;
@@ -12,8 +16,10 @@ import umc.spring.repository.MissionRepository;
 import umc.spring.repository.memberMissionRepository.MemberMissionRepository;
 import umc.spring.repository.memberRepository.MemberRepository;
 import umc.spring.web.dto.MemberResponseDTO;
+import umc.spring.web.dto.MissionDTO;
 
-import java.util.UUID;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -22,8 +28,7 @@ public class MemberMissionServiceImpl implements MemberMissionService {
 
     private final MemberRepository memberRepository;
     private final MissionRepository missionRepository;
-    private final MemberMissionRepository missionMissionRepository;
-
+    private final MemberMissionRepository memberMissionRepository;
 
 
     @Override
@@ -37,11 +42,38 @@ public class MemberMissionServiceImpl implements MemberMissionService {
 
         MemberMission newMission = MemberMissionConverter.convert(byId,memberById);
 
-        missionMissionRepository.save(newMission);
+        memberMissionRepository.save(newMission);
 
         return MemberResponseDTO.MemberMissionResponseDTO.builder()
                 .id(newMission.getId())
                 .build();
-
     }
+
+
+    @Override
+    public List<MissionDTO.MemberMissionResponseDTO> getMemberMission(Long memberId, Integer page){
+
+        int size=10;
+
+        Pageable pageable = PageRequest.of(page - 1, size);
+
+        Page<MemberMission> findMemberMissions = memberMissionRepository.findByMemberIdAndStatusTrue(memberId,pageable);
+
+        List<Mission> findMissions = findMemberMissions.stream().map(
+                        findMission -> missionRepository.findById(findMission.getId())
+                                .orElseThrow(()->new MissionCategoryHandler(ErrorStatus.MISSION_NOT_FOUND)))
+                .collect(Collectors.toList());
+
+        List<MissionDTO.MemberMissionResponseDTO> response = findMissions.stream().map(
+                        findMission-> MissionDTO.MemberMissionResponseDTO.builder()
+                                .missionId(findMission.getId())
+                                .content(findMission.getContent())
+                                .point(findMission.getPoint())
+                                .build())
+                .collect(Collectors.toList());
+
+
+        return response;
+    }
+
 }
