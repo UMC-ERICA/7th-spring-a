@@ -32,6 +32,7 @@ public class MemberMissionResponseDTO {
 
     }
 
+
     @NoArgsConstructor
     @AllArgsConstructor
     @Getter
@@ -61,6 +62,7 @@ public class MemberMissionResponseDTO {
         Boolean isLast;
 
     }
+
 
 
 }
