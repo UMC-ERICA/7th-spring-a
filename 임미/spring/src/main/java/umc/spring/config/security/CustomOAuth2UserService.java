@@ -29,7 +29,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User oAuth2User = super.loadUser(userRequest);
 
-        // 클라이언트 이름 (naver, kakao 등) 가져오기
+        // 클라이언트 이름 (google, naver, kakao 등) 가져오기
         String clientName = userRequest.getClientRegistration().getRegistrationId();
         Map<String, Object> attributes = oAuth2User.getAttributes();
 
@@ -46,6 +46,10 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             Map<String, Object> response = (Map<String, Object>) attributes.get("response");
             nickname = (String) response.get("nickname");
             email = (String) response.get("email");
+        } else if ("google".equals(clientName)) {
+            // 구글 로그인 처리
+            email = (String) attributes.get("email");
+            nickname = (String) attributes.get("name"); // Google에서는 `name` 필드에 닉네임이 포함됨
         } else {
             throw new OAuth2AuthenticationException("Unsupported client: " + clientName);
         }
@@ -63,6 +67,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
                 "email"  // email을 Principal로 설정
         );
     }
+
 
     private Member saveOrUpdateUser(String email, String nickname) {
         Member member = memberRepository.findByEmail(email)
