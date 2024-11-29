@@ -29,11 +29,26 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User oAuth2User = super.loadUser(userRequest);
 
+        // 클라이언트 이름 (naver, kakao 등) 가져오기
+        String clientName = userRequest.getClientRegistration().getRegistrationId();
         Map<String, Object> attributes = oAuth2User.getAttributes();
-        Map<String, Object> properties = (Map<String, Object>) attributes.get("properties");
 
-        String nickname = (String) properties.get("nickname");
-        String email = nickname + "@kakao.com"; // 임시 이메일 생성
+        String email;
+        String nickname;
+
+        if ("kakao".equals(clientName)) {
+            // 카카오 로그인 처리
+            Map<String, Object> properties = (Map<String, Object>) attributes.get("properties");
+            nickname = (String) properties.get("nickname");
+            email = nickname + "@kakao.com"; // 임시 이메일 생성
+        } else if ("naver".equals(clientName)) {
+            // 네이버 로그인 처리
+            Map<String, Object> response = (Map<String, Object>) attributes.get("response");
+            nickname = (String) response.get("nickname");
+            email = (String) response.get("email");
+        } else {
+            throw new OAuth2AuthenticationException("Unsupported client: " + clientName);
+        }
 
         // 사용자 정보 저장 또는 업데이트
         Member member = saveOrUpdateUser(email, nickname);
@@ -45,7 +60,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         return new DefaultOAuth2User(
                 oAuth2User.getAuthorities(),
                 modifiedAttributes,
-                "email"  // email Principal로 설정
+                "email"  // email을 Principal로 설정
         );
     }
 
