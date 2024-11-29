@@ -50,7 +50,6 @@ public class Member extends BaseEntity {
 
     private String password;
 
-
     // 매핑
 
     @OneToOne(mappedBy = "member")

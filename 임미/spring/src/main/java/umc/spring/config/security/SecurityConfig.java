@@ -29,6 +29,11 @@ public class SecurityConfig {
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/login?logout")
                         .permitAll()
+                )
+                .oauth2Login((oauth2) -> oauth2 // OAuth2 설정 추가
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/home", true)
+                        .permitAll()
                 );
 
         return http.build();
