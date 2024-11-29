@@ -32,5 +32,13 @@ public class MemberRequestDTO {
         @NotNull
         Role role;
 
+        LocalDate birthYear;
+        LocalDate birthMonth;
+        LocalDate birthDay;
+
+        String address;
+        String specAddress;
+
+
     }
 }
