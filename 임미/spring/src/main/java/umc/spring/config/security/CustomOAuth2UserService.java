@@ -76,6 +76,8 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
                         .name(nickname)
                         .password(passwordEncoder.encode("OAUTH_USER_" + UUID.randomUUID()))
                         .gender(Gender.MALE)
+                        .point(0)
+                        .status(true)
                         .address(null)// 기본값 설정
                         .role(Role.USER)
                         .build());
