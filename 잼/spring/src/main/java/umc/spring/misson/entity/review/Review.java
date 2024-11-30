@@ -1,12 +1,10 @@
-package umc.spring.misson5_homework.entity.review;
+package umc.spring.misson.entity.review;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import umc.spring.misson5_homework.base.BaseEntity;
-import umc.spring.misson5_homework.entity.user.User;
-import umc.spring.misson5_homework.entity.restaurant.Restaurant;
+import lombok.*;
+import umc.spring.misson.base.BaseEntity;
+import umc.spring.misson.entity.user.User;
+import umc.spring.misson.entity.restaurant.Restaurant;
 
 import java.util.List;
 
@@ -14,6 +12,8 @@ import java.util.List;
 @Table(name = "review")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@Builder
 public class Review extends BaseEntity {
 
     @Id
@@ -36,5 +36,5 @@ public class Review extends BaseEntity {
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String comment;
-
 }
+
