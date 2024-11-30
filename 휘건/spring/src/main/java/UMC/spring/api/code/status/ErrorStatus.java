@@ -33,8 +33,16 @@ public enum ErrorStatus implements BaseErrorCode {
     DUPLICATE_MISSION_IN_PROGRESS(HttpStatus.BAD_REQUEST, "MISSION4003", "이미 진행 중인 미션입니다."),
 
 
+    // 회원이 수락한 미션 에러
+    // 회원이 수락한 미션 에러
+    MEMBER_MISSION_NOT_FOUND(HttpStatus.BAD_REQUEST, "MEMBERMISSION4001", "회원이 수락한 미션이 존재하지 않습니다."),
+    MEMBER_MISSION_ALREADY_COMPLETED(HttpStatus.BAD_REQUEST, "MEMBERMISSION4002", "이미 완료된 미션입니다."),
+
     // 지역 관련 에러
-    REGION_NOT_FOUND(HttpStatus.BAD_REQUEST,"REGION4001", "해당 주소는 존재하지 않습니다.")
+    REGION_NOT_FOUND(HttpStatus.BAD_REQUEST,"REGION4001", "해당 주소는 존재하지 않습니다."),
+
+    // 페이징 에러
+    PAGE_VALIDATION_ERROR(HttpStatus.BAD_REQUEST,"PAGE4001", "페이지 번호는 1 이상의 값이어야 합니다.")
     ;
 
     private final HttpStatus httpStatus;
