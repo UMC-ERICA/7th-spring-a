@@ -14,8 +14,7 @@ public enum ErrorStatus implements BaseErrorCode {
 
     //test 용
     TEMP_EXCEPTION(HttpStatus.BAD_REQUEST, "TEMP4001", "테스트입니다"),
-
-
+ 
    // 멤버 관련 에러
     MEMBER_NOT_FOUND(HttpStatus.BAD_REQUEST, "MEMBER4001", "사용자가 없습니다."),
     NICKNAME_NOT_EXIST(HttpStatus.BAD_REQUEST, "MEMBER4002", "닉네임은 필수입니다."),
@@ -32,8 +31,6 @@ public enum ErrorStatus implements BaseErrorCode {
     MISSION_NOT_BELONGS_TO_STORE(HttpStatus.BAD_REQUEST, "MISSION4002", "지정된 가게에 해당 미션이 없습니다."),
     DUPLICATE_MISSION_IN_PROGRESS(HttpStatus.BAD_REQUEST, "MISSION4003", "이미 진행 중인 미션입니다."),
 
-
-    // 회원이 수락한 미션 에러
     // 회원이 수락한 미션 에러
     MEMBER_MISSION_NOT_FOUND(HttpStatus.BAD_REQUEST, "MEMBERMISSION4001", "회원이 수락한 미션이 존재하지 않습니다."),
     MEMBER_MISSION_ALREADY_COMPLETED(HttpStatus.BAD_REQUEST, "MEMBERMISSION4002", "이미 완료된 미션입니다."),
