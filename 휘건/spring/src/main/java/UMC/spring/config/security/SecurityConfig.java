@@ -1,5 +1,7 @@
 package UMC.spring.config.security;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -10,6 +12,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @EnableWebSecurity
 @Configuration
+@Slf4j
 public class SecurityConfig {
 
     @Bean
@@ -29,6 +32,14 @@ public class SecurityConfig {
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/login?logout")
                         .permitAll()
+                )
+                .oauth2Login(oauth2 -> oauth2
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/home", true)
+                        .failureHandler((request, response, exception) -> {
+                            log.error("OAuth2 로그인 실패: {}", exception.getMessage());
+                            response.sendRedirect("/login?error");
+                        })
                 );
 
         return http.build();
