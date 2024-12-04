@@ -4,6 +4,7 @@ import UMC.spring.domain.baseEntity.BaseEntity;
 
 import UMC.spring.domain.enums.MemberGender;
 import UMC.spring.domain.enums.MemberStatus;
+import UMC.spring.domain.enums.Role;
 import UMC.spring.domain.enums.SocialLoginType;
 import UMC.spring.domain.mapping.MemberAgreement;
 import UMC.spring.domain.mapping.MemberMission;
@@ -62,7 +63,11 @@ public class Member extends BaseEntity {
     @Column(nullable = false, length = 15)
     private String phone;
 
+    @Column(nullable = false)
+    private String password;
 
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     // Review OTM
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
@@ -92,6 +97,10 @@ public class Member extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "region_id")
     private Region region;
+
+    public void encodePassword(String password) {
+        this.password = password;
+    }
 
 
 }
