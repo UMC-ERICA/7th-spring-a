@@ -2,6 +2,7 @@ package umc.spring.web.dto;
 
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import umc.spring.domain.enumClass.Gender;
 import umc.spring.domain.enumClass.Role;
@@ -19,12 +20,25 @@ public class MemberRequestDTO {
 
         Integer gender;
 
+        String password;
+
         LocalDate birthDate;
 
         String email;
 
         @ExistCategories
         List<Long> preferCategory;
+
+        @NotNull
+        Role role;
+
+        LocalDate birthYear;
+        LocalDate birthMonth;
+        LocalDate birthDay;
+
+        String address;
+        String specAddress;
+
 
     }
 }

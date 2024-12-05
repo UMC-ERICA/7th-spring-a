@@ -48,6 +48,7 @@ public class Member extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    private String password;
 
     // 매핑
 

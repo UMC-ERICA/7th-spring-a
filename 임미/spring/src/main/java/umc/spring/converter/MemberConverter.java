@@ -18,7 +18,7 @@ public class MemberConverter {
                 .build();
     }
 
-    public static Member toMember(MemberRequestDTO.JoinDto request){
+    public static Member toMember(MemberRequestDTO.JoinDto request,String password){
 
         Gender gender = null;
 
@@ -37,6 +37,7 @@ public class MemberConverter {
         return Member.builder()
                 .name(request.getName())
                 .gender(gender)
+                .password(password)
                 .email(request.getEmail())
                 .birthday(request.getBirthDate())
                 .status(Boolean.TRUE)

@@ -1,5 +1,6 @@
 package umc.spring.web.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,9 +14,12 @@ import umc.spring.service.MemberService;
 import umc.spring.web.dto.MemberRequestDTO;
 import umc.spring.web.dto.MemberResponseDTO;
 
+import static org.eclipse.jdt.internal.compiler.parser.Parser.name;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/members")
+@Tag(name = "회원 관리 API")
 public class MemberRestController {
 
     private final MemberService memberService;
