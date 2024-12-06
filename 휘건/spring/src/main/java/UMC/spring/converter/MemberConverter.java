@@ -31,6 +31,8 @@ public class MemberConverter {
                 .memberName(request.getMemberName())
                 .gender(memberGender)
                 .email(request.getEmail())
+                .password(request.getPassword())
+                .role(request.getRole())
                 .phone(request.getPhone())
                 .birthdate(request.getBirthdate())
                 .memberAddress(request.getMemberAddress())
